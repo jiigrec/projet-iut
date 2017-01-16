@@ -104,8 +104,6 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
         break;
     case 'q' : if (Pos.second) Pos.second = Pos.second - 1;
         break;
-    case 's' : //Rien faire (le joueur ne bouge pas)
-        break;
     case 'd' : if (Pos.second < Mat[0].size() - 1) Pos.second = Pos.second + 1;
         break;
     case 'w' : if (Pos.first < Mat.size() - 1) Pos.first = Pos.first + 1;
@@ -119,6 +117,8 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
     default: //Ne rien faire
         break;
     }
+    //TODO: ajouter code si c'est un truc a manger ou l'autre joueur.
+
     Mat[Pos.first][Pos.second] = Player;
 }
 
@@ -186,6 +186,7 @@ int ppal () {
       char Saisie;
       bool Player = true;
       bool Win = false;
+      set_input_mode();
       while(Playing) {
             cout << "Coups: " << MaxPlays << ", joués : " << Cpt << endl;
             if (Player) { cout << "Au tour du ";
@@ -195,7 +196,7 @@ int ppal () {
             Couleur(KRouge);
             cout << "joueur 2 ! " << endl; }
             Couleur(KReset);
-            cin >> Saisie;
+            read (STDIN_FILENO, &Saisie, 1); //Lit la touche pressée.
             if (Player) MoveToken(Mat, Saisie, Player1);
             if (!Player) MoveToken(Mat, Saisie, Player2);
             ++Cpt;
@@ -207,6 +208,7 @@ int ppal () {
             }
             if (Cpt == MaxPlays) break;
       }
+      reset_input_mode();
       if (Win) {
           cout << "Félicitations ! " << endl;
           if (!Player) cout << "Le joueur 1 a gagné." << endl;
