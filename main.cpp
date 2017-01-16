@@ -8,6 +8,19 @@
 using namespace std;
 
 
+//Temporaire, a changer avec les fichiers de config
+const char KUP ('z');
+const char KDOWN ('s');
+const char KLEFT ('q');
+const char KRIGHT ('d');
+
+
+const char KPlayerUp ('^');
+const char KPlayerDown ('v');
+const char KPlayerLeft ('<');
+const char KPlayerRight ('>');
+
+
 void ClearScreen ()
 {
     cout << "\033[H\033[2J";
@@ -90,16 +103,21 @@ void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & Pos
 
 
 void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
-    char Player = Mat[Pos.first][Pos.second];
+    CPosition OldPos = Pos;
+    char Player;
     Mat[Pos.first][Pos.second] = KEmpty;
     switch (Move) {
-    case 'z' : if (Pos.first > 0) Pos.first = Pos.first - 1;
+    case KUP : if (Pos.first > 0) Pos.first = Pos.first - 1;
+        Player = KPlayerUp;
         break;
-    case 'q' : if (Pos.second) Pos.second = Pos.second - 1;
+    case KLEFT : if (Pos.second) Pos.second = Pos.second - 1;
+        Player = KPlayerLeft;
         break;
-    case 'd' : if (Pos.second < Mat[0].size() - 1) Pos.second = Pos.second + 1;
+    case KRIGHT : if (Pos.second < Mat[0].size() - 1) Pos.second = Pos.second + 1;
+        Player = KPlayerRight;
         break;
-    case 'x' : if (Pos.first < Mat.size() - 1) Pos.first = Pos.first + 1;
+    case KDOWN : if (Pos.first < Mat.size() - 1) Pos.first = Pos.first + 1;
+        Player = KPlayerDown;
         break;
     default: //Ne rien faire
         break;
