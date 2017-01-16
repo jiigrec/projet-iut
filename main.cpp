@@ -93,26 +93,13 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
     char Player = Mat[Pos.first][Pos.second];
     Mat[Pos.first][Pos.second] = KEmpty;
     switch (Move) {
-    case 'a':
-        if (Pos.first > 0) Pos.first = Pos.first - 1;
-        if (Pos.second > 0) Pos.second = Pos.second - 1;
-        break;
     case 'z' : if (Pos.first > 0) Pos.first = Pos.first - 1;
-        break;
-    case 'e' : if (Pos.first > 0 ) Pos.first = Pos.first - 1;
-        if (Pos.second < Mat[0].size() - 1) Pos.second = Pos.second + 1;
         break;
     case 'q' : if (Pos.second) Pos.second = Pos.second - 1;
         break;
     case 'd' : if (Pos.second < Mat[0].size() - 1) Pos.second = Pos.second + 1;
         break;
-    case 'w' : if (Pos.first < Mat.size() - 1) Pos.first = Pos.first + 1;
-        if (Pos.second) Pos.second = Pos.second - 1;
-        break;
     case 'x' : if (Pos.first < Mat.size() - 1) Pos.first = Pos.first + 1;
-        break;
-    case 'c' : if (Pos.first < Mat.size() - 1) Pos.first = Pos.first + 1;
-        if (Pos.second < Mat[0].size() - 1) Pos.second = Pos.second + 1;
         break;
     default: //Ne rien faire
         break;
