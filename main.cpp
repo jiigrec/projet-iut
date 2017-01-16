@@ -38,6 +38,9 @@ const char KTokenPlayer1 = 'X';
 const char KTokenPlayer2 = 'O';
 const char KEmpty        = ' ';
 
+//Stockage des paramètres du Terminal, pour changer le mode entre canonique et non canonique
+struct termios saved_attributes;
+
 
 
 void  ShowMatrix (const CMatrix & Mat) {
@@ -129,7 +132,16 @@ void getWindowSize(CTerminalSize & Size) {
 }
 
 
-//http://www.gnu.org/software/libc/manual/html_node/Noncanon-Example.html
+
+/* Code copié depuis :
+http://www.gnu.org/software/libc/manual/html_node/Noncanon-Example.html
+*/
+
+void reset_input_mode (void)
+{
+  tcsetattr (STDIN_FILENO, TCSANOW, &saved_attributes);
+}
+
 void set_input_mode (void)
 {
   struct termios tattr;
@@ -141,6 +153,10 @@ void set_input_mode (void)
       exit (EXIT_FAILURE);
   }
 
+  /* Save the terminal attributes so we can restore them later. */
+   tcgetattr (STDIN_FILENO, &saved_attributes);
+   atexit (reset_input_mode);
+
   /* Set the funny terminal modes. */
   tcgetattr (STDIN_FILENO, &tattr);
   tattr.c_lflag &= ~(ICANON|ECHO); /* Clear ICANON and ECHO. */
@@ -148,6 +164,8 @@ void set_input_mode (void)
   tattr.c_cc[VTIME] = 3;
   tcsetattr (STDIN_FILENO, TCSAFLUSH, &tattr);
 }
+
+/* Fin du code copié */
 
 
 unsigned getMaxPlays(CMatrix & Mat) {
@@ -196,7 +214,7 @@ int ppal () {
       } else {
           cout << "Match nul." << endl;
       }
-      return 0; //TODO: changer ca
+      return 0; //TODO: changer ca  --> ?
 }
 
 
