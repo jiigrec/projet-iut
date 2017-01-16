@@ -106,6 +106,11 @@ void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & Pos
 }
 
 
+bool checkEat(char & Object, CPosition & Pos) {
+  // A coder
+    return true;
+}
+
 void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
     CPosition OldPos = Pos;
     char Player;
@@ -130,10 +135,14 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
     default: //Ne rien faire
         break;
     }
-    //TODO: ajouter code si c'est un truc a manger ou l'autre joueur.
-
+    if (Mat[Pos.first][Pos.second] != KEmpty)
+        if (!checkEat(Mat[Pos.first][Pos.second], Pos))
+            Pos = OldPos;
     Mat[Pos.first][Pos.second] = Player;
 }
+
+
+
 
 
 void getWindowSize(CTerminalSize & Size) {
