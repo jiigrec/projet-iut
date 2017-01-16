@@ -18,6 +18,8 @@ const char KDOWN2 ('l');
 const char KLEFT2 ('k');
 const char KRIGHT2 ('m');
 
+const char KFOOD ('#');
+//Fin des valeurs temporaires
 
 const char KPlayerUp ('^');
 const char KPlayerDown ('v');
@@ -106,8 +108,28 @@ void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & Pos
 }
 
 
-bool checkEat(char & Object, CPosition & Pos) {
-  // A coder
+bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & PosPlayer) {
+    switch (Object) {
+    case KPlayerDown:
+    case KPlayerUp:
+    case KPlayerLeft:
+    case KPlayerRight: // C'est un joueur
+        //Si les joueurs se font face, ils ne peuvent pas se manger.
+        if (PosObject.first > PosPlayer.first && Object == KPlayerUp && Player == KPlayerDown)
+            return false;
+        if (PosObject.first < PosPlayer.first && Object == KPlayerDown && Player == KPlayerUp)
+            return false;
+        if (PosObject.second > PosPlayer.second && Object == KPlayerLeft && Player == KPlayerRight)
+            return false;
+        if (PosObject.second < PosPlayer.second && Object == KPlayerRight && Player == KPlayerLeft)
+            return false;
+        //Ici, un joueur mange l'autre. Sinon, la fonction a déjà fini son éxécution.
+
+        break;
+    default:  // Pas un joueur
+        break;
+    }
+
     return true;
 }
 
@@ -136,7 +158,7 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
         break;
     }
     if (Mat[Pos.first][Pos.second] != KEmpty)
-        if (!checkEat(Mat[Pos.first][Pos.second], Pos))
+        if (!checkEat(Mat[Pos.first][Pos.second], Pos, Mat[OldPos.first][OldPos.second], OldPos))
             Pos = OldPos;
     Mat[Pos.first][Pos.second] = Player;
 }
@@ -224,6 +246,7 @@ int ppal () {
             ++Cpt;
             Player = !(Player);
             ShowMatrix(Mat);
+            /* Refaire cette fonction pour les conditions de victoire. */
             if (Player1 == Player2) {
                 Win = true;
                 break;
@@ -238,7 +261,7 @@ int ppal () {
       } else {
           cout << "Match nul." << endl;
       }
-      return 0; //TODO: changer ca  --> ?
+      return 0;
 }
 
 
@@ -247,6 +270,8 @@ int ppal () {
 
 int main(int argc, char *argv[])
 {
+    //Menu ici, le jeu utilisera les reglages stockés dans des variables globales
+
     ppal();
 
     return 0;
