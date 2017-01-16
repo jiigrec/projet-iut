@@ -13,6 +13,10 @@ const char KUP ('z');
 const char KDOWN ('s');
 const char KLEFT ('q');
 const char KRIGHT ('d');
+const char KUP2 ('o');
+const char KDOWN2 ('l');
+const char KLEFT2 ('k');
+const char KRIGHT2 ('m');
 
 
 const char KPlayerUp ('^');
@@ -107,16 +111,20 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
     char Player;
     Mat[Pos.first][Pos.second] = KEmpty;
     switch (Move) {
-    case KUP : if (Pos.first > 0) Pos.first = Pos.first - 1;
+    case KUP:
+    case KUP2 : if (Pos.first > 0) Pos.first = Pos.first - 1;
         Player = KPlayerUp;
         break;
-    case KLEFT : if (Pos.second) Pos.second = Pos.second - 1;
+    case KLEFT:
+    case KLEFT2 : if (Pos.second) Pos.second = Pos.second - 1;
         Player = KPlayerLeft;
         break;
-    case KRIGHT : if (Pos.second < Mat[0].size() - 1) Pos.second = Pos.second + 1;
+    case KRIGHT:
+    case KRIGHT2 : if (Pos.second < Mat[0].size() - 1) Pos.second = Pos.second + 1;
         Player = KPlayerRight;
         break;
-    case KDOWN : if (Pos.first < Mat.size() - 1) Pos.first = Pos.first + 1;
+    case KDOWN:
+    case KDOWN2 : if (Pos.first < Mat.size() - 1) Pos.first = Pos.first + 1;
         Player = KPlayerDown;
         break;
     default: //Ne rien faire
