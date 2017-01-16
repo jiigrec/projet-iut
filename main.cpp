@@ -276,3 +276,25 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
+
+/* Exemple de menu pour les noobs :
+ *
+ *  cout << "menu :" << endl << "1. Pates " << endl << "2. PIzza " << endl ;
+    int choix;
+    cin >> choix;
+    switch (choix) {
+    case 1:
+        cout << "Vs avez choisi des pates" << endl;
+        break;
+    case 2:
+        cout << "Vous avez choisi la pizza." << endl;
+    default:
+        cout << "Ce choix n'est pas disponible !" <<endl;
+        break;
+    }
+
+
+    */
+
+
