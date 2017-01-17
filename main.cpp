@@ -61,6 +61,11 @@ const char KEmpty        = ' ';
 //Stockage des paramètres du Terminal, pour changer le mode entre canonique et non canonique
 struct termios saved_attributes;
 
+CPosition Player1;
+CPosition Player2;
+int ScoreJ1;
+int ScoreJ2;
+
 
 
 pair <unsigned, string> displayMenu( vector<string> & Items) {
@@ -83,15 +88,6 @@ vector<string> getDirectoryContents(string & Directory) {
    //Regarder sur internet pour celle la. C'est pas inné ni dans les TP
 
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -143,6 +139,10 @@ void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & Pos
 }
 
 
+bool isFirstPlayer(CPosition & Pos) {
+    return (Pos == Player1); //Expression booléenne
+}
+
 bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & PosPlayer) {
     switch (Object) {
     case KPlayerDown:
@@ -159,6 +159,14 @@ bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & Po
         if (PosObject.second < PosPlayer.second && Object == KPlayerRight && Player == KPlayerLeft)
             return false;
         //Ici, un joueur mange l'autre. Sinon, la fonction a déjà fini son éxécution.
+        if (isFirstPlayer(PosPlayer))
+            ++ScoreJ1;
+        else
+            ++ScoreJ2;
+
+
+        break;
+      case KFOOD:
 
         break;
     default:  // Pas un joueur
@@ -254,8 +262,6 @@ unsigned getMaxPlays(CMatrix & Mat) {
 int ppal () {
       bool Playing = true;
       CMatrix Mat;
-      CPosition Player1;
-      CPosition Player2;
       unsigned Cpt = 0;
       CTerminalSize WindowSize;
       getWindowSize(WindowSize);
@@ -266,6 +272,8 @@ int ppal () {
       bool Player = true;
       bool Win = false;
       set_input_mode();
+      ScoreJ1 = 0;
+      ScoreJ2 = 0;
       while(Playing) {
             cout << "Coups: " << MaxPlays << ", joués : " << Cpt << endl;
             if (Player) { cout << "Au tour du ";
