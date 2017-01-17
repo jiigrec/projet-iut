@@ -3,6 +3,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <termios.h>
+#include <time.h>
 
 
 using namespace std;
@@ -61,11 +62,16 @@ const char KEmpty        = ' ';
 //Stockage des paramètres du Terminal, pour changer le mode entre canonique et non canonique
 struct termios saved_attributes;
 
+
+//Variables utilisées pendant le jeu
 CPosition Player1;
 CPosition Player2;
 int ScoreJ1;
 int ScoreJ2;
 
+//Variables qui gardent le temps
+unsigned long Time;
+unsigned EndTime;
 
 
 pair <unsigned, string> displayMenu( vector<string> & Items) {
@@ -90,7 +96,21 @@ vector<string> getDirectoryContents(string & Directory) {
 }
 
 
+void startTimer() {
+    Time = clock();
+}
 
+unsigned getSecondsElapsed() {
+    return ((unsigned) clock() - begTime) / CLOCKS_PER_SEC;
+}
+
+unsigned getTimeLeft() {
+    return EndTime - getSecondsElapsed();
+}
+
+void pause() {
+    //Ici, faire une pause dans le temps.
+}
 
 
 void  ShowMatrix (const CMatrix & Mat) {
@@ -160,14 +180,15 @@ bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & Po
             return false;
         //Ici, un joueur mange l'autre. Sinon, la fonction a déjà fini son éxécution.
         if (isFirstPlayer(PosPlayer))
+            ScoreJ1 = ScoreJ1 + 5;
+        else
+            ScoreJ2 = ScoreJ2 + 5;
+        break;
+      case KFOOD:
+        if (isFirstPlayer(PosPlayer))
             ++ScoreJ1;
         else
             ++ScoreJ2;
-
-
-        break;
-      case KFOOD:
-
         break;
     default:  // Pas un joueur
         break;
