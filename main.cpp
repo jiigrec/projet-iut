@@ -171,6 +171,7 @@ void gamePause() {
 void  ShowMatrix (const CMatrix & Mat) {
     ClearScreen();
     Couleur(KReset);
+    cout << "Temps restant : " << getTimeLeft() << " Score J1: " << ScoreJ1 << " Score J2: " << ScoreJ2;
     for (unsigned i = 0; i <= Mat[0].size() + 1; ++i) cout << "=";
     cout << endl;
     for (unsigned i = 0; i < Mat.size(); ++i) {
@@ -179,14 +180,19 @@ void  ShowMatrix (const CMatrix & Mat) {
             if (Mat[i][j] == KEmpty) {
                 cout << KEmpty;
             }
-            if (Mat[i][j] == KTokenPlayer1) {
+            if (i == Player1.first && j == Player1.second) {
                 Couleur(KVert);
-                cout << KTokenPlayer1;
+                cout << Mat[i][j];
                 Couleur(KReset);
             }
-            if (Mat[i][j] == KTokenPlayer2) {
+            if (i == Player2.first && j == Player2.second) {
                 Couleur(KRouge);
-                cout << KTokenPlayer2;
+                cout << Mat[i][j];
+                Couleur(KReset);
+            }
+            if (Mat[i][j] == KFOOD) {
+                Couleur(KBleu);
+                cout << KFOOD;
                 Couleur(KReset);
             }
         }
@@ -329,15 +335,12 @@ unsigned getMaxPlays(CMatrix & Mat) {
 
 int ppal () {
       bool Playing = true;
-      unsigned Cpt = 0;
       CTerminalSize WindowSize;
       getWindowSize(WindowSize);
-      InitMat(Mat, WindowSize.first - 5,WindowSize.second - 2,Player1,Player2);
+      InitMat(Mat, WindowSize.first - 6,WindowSize.second - 2,Player1,Player2);
       unsigned MaxPlays = getMaxPlays(Mat);
       ShowMatrix(Mat);
       char Saisie;
-      bool Player = true;
-      bool Win = false;
       set_input_mode();
       ScoreJ1 = 0;
       ScoreJ2 = 0;
@@ -348,8 +351,8 @@ int ppal () {
             if (!(getTimeLeft() >= 0))
                 break;
       }
-
       reset_input_mode();
+
 
       return 0;
 }
