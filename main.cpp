@@ -1,4 +1,5 @@
 #include <iostream>
+#include <istream>
 #include <vector>
 #include <sys/ioctl.h>
 #include <unistd.h>
@@ -6,6 +7,12 @@
 #include <time.h>
 #include <dirent.h> 
 #include <stdio.h> 
+
+#ifdef __APPLE__ && __MACH__
+//#include "OSX/osx_sound.h"
+#else
+//#include "linux_sound.h"
+#endif
 
 using namespace std;
 
@@ -77,6 +84,7 @@ int ScoreJ2;
 unsigned long Time;
 unsigned EndTime;
 
+/*
 void AffichFich()
 {
     ifstream ifs ("Yalm.txt");
@@ -87,7 +95,7 @@ void AffichFich()
         if (ifs.eof()) break;
         cout << Ligne << endl;
     }
-}
+}  */
 
 pair <unsigned, string> displayMenu( vector<string> & Items) {
     cout << "Menu : " << endl;
@@ -102,16 +110,16 @@ pair <unsigned, string> displayMenu( vector<string> & Items) {
             return  pair<unsigned, string> (i - 1, Items[i - 1]);
 }
 
-unsigned Victory (const players & player)
+/*unsigned Victory (const players & player)
         {
-            if (0 == player[X].size ()) return 2;
-            else if (0 == player[O].size()) return 1;
+           // if (0 == player[X].size ()) return 2;
+            //else if (0 == player[O].size()) return 1;
             return 0;
-        } //Permet de savoir qui gagne ...
+        } //Permet de savoir qui gagne ... */
 
  void MenuTuto()
     {
-        AffichFich("MODEDEJEU.txt");
+      //  AffichFich("MODEDEJEU.txt");
         char Choix;
         char quit;
         cin>>Choix;
@@ -119,7 +127,7 @@ unsigned Victory (const players & player)
         switch(Choix)
         {
         case'1':
-            ShowFile("TUTORIEL.txt");
+         //   ShowFile("TUTORIEL.txt");
             cin>>quit;
             while(quit!='5')
                 cin>>quit;
@@ -128,6 +136,7 @@ unsigned Victory (const players & player)
         default:
             break;
         }
+ }
 
 vector<string> getDirectoryContents(string & Directory) {
 
