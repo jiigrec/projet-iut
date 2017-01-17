@@ -173,6 +173,7 @@ int getTimeLeft() {
 }
 
 void gamePause() {
+    ClearScreen();
     reset_input_mode();
     char c = 'y';
     cout << "Jeu en pause. Appuyez sur 1 puis entrée pour reprendre." << endl;
@@ -180,6 +181,7 @@ void gamePause() {
         cin >> c;
     }
     set_input_mode();
+    ClearScreen();
 }
 
 
