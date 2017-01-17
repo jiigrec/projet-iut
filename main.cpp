@@ -4,7 +4,8 @@
 #include <unistd.h>
 #include <termios.h>
 #include <time.h>
-
+#include <dirent.h> 
+#include <stdio.h> 
 
 using namespace std;
 
@@ -91,7 +92,18 @@ vector<string> getDirectoryContents(string & Directory) {
 
     //Donne la liste des fichiers contenus dans un dossier et les donne dans un vcteur.
 
-   //Regarder sur internet pour celle la. C'est pas inné ni dans les TP
+   DIR           *d;
+  struct dirent *dir;
+  d = opendir(".");
+  if (d)
+  {
+    while ((dir = readdir(d)) != NULL)
+    {
+      printf("%s\n", dir->d_name);
+    }
+
+    closedir(d);
+  }
 
 }
 
