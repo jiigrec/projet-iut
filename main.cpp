@@ -48,7 +48,7 @@ const string KNoir    ("30");
 const string KRouge   ("31");
 const string KVert    ("32");
 const string KJaune   ("33");
-const string KBleu    ("34");
+const string KBleu    ("34");git@github.com:jiigrec/projet-iut.git
 const string KMAgenta ("35");
 const string KCyan    ("36");
 
@@ -104,7 +104,7 @@ pair <unsigned, string> displayMenu( vector<string> & Items) {
         cout << i << " : " << Items[i - 1] << endl;
     cout << "Entrez votre choix :" << endl;
     int choix;
-    cin >> choix;
+    cin >> choix;git@github.com:jiigrec/projet-iut.git
     while (true)
         if (choix <= 0 || choix > Items.size())
             return  pair<unsigned, string> (i - 1, Items[i - 1]);
@@ -382,6 +382,10 @@ unsigned getMaxPlays(CMatrix & Mat) {
     return ((Mat.size() * Mat[0].size()) / 10);
 }
 
+void win(unsigned & Player, unsigned & Score1, unsigned & Score2) {
+        cout << "Félicitations au Joueur " << Player << " ! Il gagne avec " << Score1 << " points contre " << Score2 << "points." << endl;
+}
+
 int ppal () {
       bool Playing = true;
       CTerminalSize WindowSize;
@@ -401,7 +405,10 @@ int ppal () {
                 break;
       }
       reset_input_mode();
-
+      if (ScoreJ1 > ScoreJ2)
+          win(1, ScoreJ1, ScoreJ2);
+      else
+          win(2, ScoreJ2, ScoreJ1);
 
       return 0;
 }
