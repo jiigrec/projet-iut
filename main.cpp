@@ -41,6 +41,7 @@ const string KBleu    ("34");
 const string KMAgenta ("35");
 const string KCyan    ("36");
 
+
 void Couleur (const string & coul)
 {
     cout << "\033[" << coul <<"m";
@@ -59,6 +60,40 @@ const char KEmpty        = ' ';
 
 //Stockage des paramètres du Terminal, pour changer le mode entre canonique et non canonique
 struct termios saved_attributes;
+
+
+
+pair <unsigned, string> displayMenu( vector<string> & Items) {
+
+    //Cette fonction va afficher un menu avec tous les éléments du vecteur. Apres le choix, la fonction retourne une paire
+    //avec le numero du choix et la chaine de caractère du choix
+
+
+
+}
+
+
+
+
+
+vector<string> getDirectoryContents(string & Directory) {
+
+    //Donne la liste des fichiers contenus dans un dossier et les donne dans un vcteur.
+
+   //Regarder sur internet pour celle la. C'est pas inné ni dans les TP
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
