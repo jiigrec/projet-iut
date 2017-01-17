@@ -104,7 +104,7 @@ unsigned getSecondsElapsed() {
     return ((unsigned) clock() - begTime) / CLOCKS_PER_SEC;
 }
 
-unsigned getTimeLeft() {
+int getTimeLeft() {
     return EndTime - getSecondsElapsed();
 }
 
@@ -141,6 +141,8 @@ void  ShowMatrix (const CMatrix & Mat) {
     for (unsigned i = 0; i <= Mat[0].size() + 1; ++i) cout << "=";
     cout << endl;
 }
+
+
 
 void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & PosPlayer1, CPosition & PosPlayer2) {
     Mat.resize(NbLine);
@@ -230,11 +232,10 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
 
 
 
-
+//Fonction qui donne la taille de la fenêtre
 void getWindowSize(CTerminalSize & Size) {
     struct winsize size;
     ioctl(STDOUT_FILENO,TIOCGWINSZ,&size);
-    /* size.ws_row is the number of rows, size.ws_col is the number of columns. */
     Size.first = size.ws_row;
     Size.second = size.ws_col;
 }
@@ -296,35 +297,15 @@ int ppal () {
       ScoreJ1 = 0;
       ScoreJ2 = 0;
       while(Playing) {
-            cout << "Coups: " << MaxPlays << ", joués : " << Cpt << endl;
-            if (Player) { cout << "Au tour du ";
-            Couleur(KVert);
-            cout << "joueur 1 ! " << endl; }
-            if (!Player) { cout << "Au tour du ";
-            Couleur(KRouge);
-            cout << "joueur 2 ! " << endl; }
-            Couleur(KReset);
-            read (STDIN_FILENO, &Saisie, 1); //Lit la touche pressée.
-            if (Player) MoveToken(Mat, Saisie, Player1);
-            if (!Player) MoveToken(Mat, Saisie, Player2);
-            ++Cpt;
-            Player = !(Player);
             ShowMatrix(Mat);
-            /* Refaire cette fonction pour les conditions de victoire. */
-            if (Player1 == Player2) {
-                Win = true;
+            read (STDIN_FILENO, &Saisie, 1); //Lit la touche pressée.
+            readInput(Saisie);
+            if (!(getTimeLeft() >= 0))
                 break;
-            }
-            if (Cpt == MaxPlays) break;
       }
+
       reset_input_mode();
-      if (Win) {
-          cout << "Félicitations ! " << endl;
-          if (!Player) cout << "Le joueur 1 a gagné." << endl;
-          if (Player) cout << "Le joueur 2 a gagné." << endl;
-      } else {
-          cout << "Match nul." << endl;
-      }
+
       return 0;
 }
 
