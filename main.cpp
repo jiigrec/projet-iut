@@ -79,12 +79,16 @@ unsigned EndTime;
 
 
 pair <unsigned, string> displayMenu( vector<string> & Items) {
-
-    //Cette fonction va afficher un menu avec tous les éléments du vecteur. Apres le choix, la fonction retourne une paire
-    //avec le numero du choix et la chaine de caractère du choix
-
-
-
+    cout << "Menu : " << endl;
+    unsigned i;
+    for (i = 1; i <= Items.size(); ++i)
+        cout << i << " : " << Items[i - 1] << endl;
+    cout << "Entrez votre choix :" << endl;
+    int choix;
+    cin >> choix;
+    while (true)
+        if (choix <= 0 || choix > Items.size())
+            return  pair<unsigned, string> (i - 1, Items[i - 1]);
 }
 
 
