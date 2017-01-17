@@ -20,6 +20,8 @@ const char KDOWN2 ('l');
 const char KLEFT2 ('k');
 const char KRIGHT2 ('m');
 
+const char KPAUSE ('g');
+
 const char KFOOD ('#');
 //Fin des valeurs temporaires
 
@@ -65,6 +67,7 @@ struct termios saved_attributes;
 
 
 //Variables utilisées pendant le jeu
+CMatrix Mat;
 CPosition Player1;
 CPosition Player2;
 int ScoreJ1;
@@ -108,20 +111,60 @@ vector<string> getDirectoryContents(string & Directory) {
 }
 
 
+/* Code copié depuis :
+http://www.gnu.org/software/libc/manual/html_node/Noncanon-Example.html
+*/
+
+void reset_input_mode (void)
+{
+  tcsetattr (STDIN_FILENO, TCSANOW, &saved_attributes);
+}
+
+void set_input_mode (void)
+{
+  struct termios tattr;
+
+  /* Make sure stdin is a terminal. */
+  if (!isatty (STDIN_FILENO))
+  {
+      fprintf (stderr, "Not a terminal.\n");
+      exit (EXIT_FAILURE);
+  }
+
+  /* Save the terminal attributes so we can restore them later. */
+   tcgetattr (STDIN_FILENO, &saved_attributes);
+   atexit (reset_input_mode);
+
+  /* Set the funny terminal modes. */
+  tcgetattr (STDIN_FILENO, &tattr);
+  tattr.c_lflag &= ~(ICANON|ECHO); /* Clear ICANON and ECHO. */
+  tattr.c_cc[VMIN] = 0;
+  tattr.c_cc[VTIME] = 3;
+  tcsetattr (STDIN_FILENO, TCSAFLUSH, &tattr);
+}
+
+/* Fin du code copié */
+
 void startTimer() {
     Time = clock();
 }
 
 unsigned getSecondsElapsed() {
-    return ((unsigned) clock() - begTime) / CLOCKS_PER_SEC;
+    return ((unsigned) clock() - Time) / CLOCKS_PER_SEC;
 }
 
 int getTimeLeft() {
     return EndTime - getSecondsElapsed();
 }
 
-void pause() {
-    //Ici, faire une pause dans le temps.
+void gamePause() {
+    reset_input_mode();
+    char c = 'y';
+    cout << "Jeu en pause. Appuyez sur 1 puis entrée pour reprendre." << endl;
+    while (c != '1') {
+        cin >> c;
+    }
+    set_input_mode();
 }
 
 
@@ -171,6 +214,7 @@ void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & Pos
     PosPlayer2 = {NbLine - 1, NbColumn - 1};
     Mat[PosPlayer2.first][PosPlayer2.second] = KTokenPlayer2;
 }
+
 
 
 bool isFirstPlayer(CPosition & Pos) {
@@ -242,6 +286,28 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
 }
 
 
+void readInput(char & Input) {
+    switch (Input) {
+    case KUP:
+    case KDOWN:
+    case KLEFT:
+    case KRIGHT:
+        MoveToken(Mat, Input, Player1);
+        break;
+    case KUP2:
+    case KDOWN2:
+    case KLEFT2:
+    case KRIGHT2:
+        MoveToken(Mat, Input, Player2);
+        break;
+    case KPAUSE:
+        gamePause();
+        break;
+    default:
+        // Ne rien faire
+        break;
+    }
+}
 
 
 //Fonction qui donne la taille de la fenêtre
@@ -254,39 +320,7 @@ void getWindowSize(CTerminalSize & Size) {
 
 
 
-/* Code copié depuis :
-http://www.gnu.org/software/libc/manual/html_node/Noncanon-Example.html
-*/
 
-void reset_input_mode (void)
-{
-  tcsetattr (STDIN_FILENO, TCSANOW, &saved_attributes);
-}
-
-void set_input_mode (void)
-{
-  struct termios tattr;
-
-  /* Make sure stdin is a terminal. */
-  if (!isatty (STDIN_FILENO))
-  {
-      fprintf (stderr, "Not a terminal.\n");
-      exit (EXIT_FAILURE);
-  }
-
-  /* Save the terminal attributes so we can restore them later. */
-   tcgetattr (STDIN_FILENO, &saved_attributes);
-   atexit (reset_input_mode);
-
-  /* Set the funny terminal modes. */
-  tcgetattr (STDIN_FILENO, &tattr);
-  tattr.c_lflag &= ~(ICANON|ECHO); /* Clear ICANON and ECHO. */
-  tattr.c_cc[VMIN] = 0;
-  tattr.c_cc[VTIME] = 3;
-  tcsetattr (STDIN_FILENO, TCSAFLUSH, &tattr);
-}
-
-/* Fin du code copié */
 
 
 unsigned getMaxPlays(CMatrix & Mat) {
@@ -295,7 +329,6 @@ unsigned getMaxPlays(CMatrix & Mat) {
 
 int ppal () {
       bool Playing = true;
-      CMatrix Mat;
       unsigned Cpt = 0;
       CTerminalSize WindowSize;
       getWindowSize(WindowSize);
