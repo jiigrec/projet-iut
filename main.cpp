@@ -102,7 +102,12 @@ pair <unsigned, string> displayMenu( vector<string> & Items) {
             return  pair<unsigned, string> (i - 1, Items[i - 1]);
 }
 
-
+unsigned Victory (const players & player)
+        {
+            if (0 == player[X].size ()) return 2;
+            else if (0 == player[O].size()) return 1;
+            return 0;
+        } //Permet de savoir qui gagne ...
 
 
 
