@@ -77,6 +77,17 @@ int ScoreJ2;
 unsigned long Time;
 unsigned EndTime;
 
+void AffichFich()
+{
+    ifstream ifs ("Yalm.txt");
+    string Ligne;
+    while (true)
+    {
+        getline (ifs, Ligne);
+        if (ifs.eof()) break;
+        cout << Ligne << endl;
+    }
+}
 
 pair <unsigned, string> displayMenu( vector<string> & Items) {
     cout << "Menu : " << endl;
