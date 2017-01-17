@@ -109,7 +109,25 @@ unsigned Victory (const players & player)
             return 0;
         } //Permet de savoir qui gagne ...
 
-
+ void MenuTuto()
+    {
+        AffichFich("MODEDEJEU.txt");
+        char Choix;
+        char quit;
+        cin>>Choix;
+        ClearScreen();
+        switch(Choix)
+        {
+        case'1':
+            ShowFile("TUTORIEL.txt");
+            cin>>quit;
+            while(quit!='5')
+                cin>>quit;
+            ClearScreen();
+            break;
+        default:
+            break;
+        }
 
 vector<string> getDirectoryContents(string & Directory) {
 
