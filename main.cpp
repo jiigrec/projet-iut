@@ -39,6 +39,7 @@ struct CMyParam {
     bool IA;
     unsigned difficulty;
     unsigned randomFrequency;
+    unsigned endTime;
 };
 
 
@@ -96,7 +97,6 @@ unsigned ScoreJ2;
 
 //Variables qui gardent le temps
 unsigned long Time;
-unsigned EndTime;
 unsigned randomCounter = 0;
 
 
@@ -195,6 +195,7 @@ void setDefaults(CMyParam & MyParams) {
    MyParams.difficulty = 1;
    MyParams.IA = false;
    MyParams.randomFrequency = 3;
+   MyParams.endTime = 60;
 }
 
 
@@ -382,7 +383,7 @@ unsigned getSecondsElapsed() {
 
 //Donne le temps restant des joueurs
 int getTimeLeft() {
-    return EndTime - getSecondsElapsed();
+    return Settings.endTime - getSecondsElapsed();
 }
 
 
@@ -594,6 +595,7 @@ bool ppal () {
             ShowMatrix(Mat);
             read (STDIN_FILENO, &Saisie, 1); //Lit la touche pressée.
             readInput(Saisie);
+            popFood(Mat);
             if (!(getTimeLeft() >= 0))
                 break;
       }

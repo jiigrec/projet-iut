@@ -6,6 +6,9 @@ ColorPlayer2 : rouge
 ColorFood : jaune
 
 
+# caractere du trésor #
+
+food : #
 
 # Controles du jeu
 
