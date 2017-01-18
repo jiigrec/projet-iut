@@ -1,0 +1,32 @@
+# Couleur des pions de joueur et des trésors 
+Valeurs possibles : noir, rouge, vert, bleu, jaune, magenta, cyan #
+
+ColorPlayer1 : bleu
+ColorPlayer2 : rouge
+ColorFood : jaune
+
+
+
+# Controles du jeu
+
+ Joueur 1  #
+
+J1Up : z
+J1Down : s
+J1Left : q
+J1Right : d
+
+# Joueur 2  #
+
+J2Up : o
+J2Down : l
+J2Left : k
+J2Right : m
+
+# Touche pause   #
+pause : g
+
+# Langue par defaut:  #
+
+langue : FR
+

@@ -1,0 +1,25 @@
+DifficultyChoose : Choisir_la_difficulte
+DifficultyEasy : Facile
+DifficultyMedium : Moyen
+DifficultyHard : Difficile
+EnterChoice : Entrez_votre_choix
+1PlayerMode : Mode_1_joueur
+2PlayerMode : Mode_2_joueurs
+SelectToChange : Choisissez_pour_changer
+ChangeDifficulty : Changer_la_difficulte
+Current : Actuellement
+ChangeLanguage : Changer_la_langue
+Help : Aide
+Play : Jouer
+Quit : Quitter
+PauseDialog : Jeu_en_pause._Appuyez_sur_1_puis_entree_pour_reprendre.
+TimeLeft : Temps_restant
+P1Score : Score_J1
+P2Score : Score_J2
+CongratulationsDialog:_Felicitaions_au_joueur
+WinDialog : Il_gagne_avec
+FinalScore1 : _points_contre
+FinalScore2 : _points.
+BackMenu : Revenir_au_menu
+HelpFile : Aide.txt
+HelpEnd : Appuyez_sur_1_puis_entrée_pour_revenir.
