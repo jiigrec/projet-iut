@@ -5,11 +5,13 @@ CONFIG -= qt
 
 QMAKE_MAC_SDK = macosx10.12
 
-LIBS +=  -l"$$_PRO_FILE_PWD_/sound"/libportaudio.a -static
+LIBS +=   -static
+
+#-l"$$_PRO_FILE_PWD_/sound"/libportaudio.a
 
 SOURCES += main.cpp \
-    sound.cpp
+   # sound.cpp
 
 HEADERS += \
-    sound/portaudio.h \
-    sound.h
+  #  sound/portaudio.h \
+  #  sound.h
