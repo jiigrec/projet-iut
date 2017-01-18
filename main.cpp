@@ -190,6 +190,12 @@ void LoadParams(CMyParam & MyParams) {
     stream.close();
 }
 
+//Défénit en mémoire les valeurs par défaut de configuration
+void setDefaults(CMyParam & MyParams) {
+   MyParams.difficulty = 1;
+   MyParams.IA = false;
+   MyParams.randomFrequency = 3;
+}
 
 
 //Donne le code couleur à partir d'une couleur en language commun
@@ -605,6 +611,7 @@ bool ppal () {
 int main()
 {
     LoadParams(Settings);
+    setDefaults(Settings);
     bool playing = true;
     while(playing) {
         playing = mainMenu();
