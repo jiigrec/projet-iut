@@ -7,12 +7,8 @@
 #include <time.h>
 #include <dirent.h> 
 #include <stdio.h> 
-
-#ifdef __APPLE__ && __MACH__
-//#include "OSX/osx_sound.h"
-#else
-//#include "linux_sound.h"
-#endif
+#include <random>
+#include "sound.h"
 
 using namespace std;
 
@@ -48,7 +44,7 @@ const string KNoir    ("30");
 const string KRouge   ("31");
 const string KVert    ("32");
 const string KJaune   ("33");
-const string KBleu    ("34");git@github.com:jiigrec/projet-iut.git
+const string KBleu    ("34");
 const string KMAgenta ("35");
 const string KCyan    ("36");
 
@@ -77,8 +73,10 @@ struct termios saved_attributes;
 CMatrix Mat;
 CPosition Player1;
 CPosition Player2;
-int ScoreJ1;
-int ScoreJ2;
+unsigned ScoreJ1;
+unsigned ScoreJ2;
+int randomFrequency;
+int randomCounter;
 
 //Variables qui gardent le temps
 unsigned long Time;
@@ -104,18 +102,12 @@ pair <unsigned, string> displayMenu( vector<string> & Items) {
         cout << i << " : " << Items[i - 1] << endl;
     cout << "Entrez votre choix :" << endl;
     int choix;
-    cin >> choix;git@github.com:jiigrec/projet-iut.git
+    cin >> choix;
     while (true)
         if (choix <= 0 || choix > Items.size())
             return  pair<unsigned, string> (i - 1, Items[i - 1]);
 }
 
-/*unsigned Victory (const players & player)
-        {
-           // if (0 == player[X].size ()) return 2;
-            //else if (0 == player[O].size()) return 1;
-            return 0;
-        } //Permet de savoir qui gagne ... */
 
  void MenuTuto()
     {
@@ -214,6 +206,22 @@ void gamePause() {
     }
     set_input_mode();
     ClearScreen();
+}
+
+void popFood(CMatrix & Mat) {
+    if (randomCounter == randomFrequency) {
+        randomCounter = 0;
+        random_device rd;
+        mt19937 mt(rd());
+        uniform_int_distribution<int> vert(1, Mat.size());
+        uniform_int_distribution<int> hor(1, Mat[0].size());
+        CPosition food = pair<int, int> (vert(mt), hor(mt));
+        while (food == Player1 || food == Player2) {
+            food = pair<int, int> (vert(mt), hor(mt));
+        }
+        Mat[food.first][food.second] = KFOOD;
+    } else
+        ++randomCounter;
 }
 
 
@@ -374,15 +382,7 @@ void getWindowSize(CTerminalSize & Size) {
 }
 
 
-
-
-
-
-unsigned getMaxPlays(CMatrix & Mat) {
-    return ((Mat.size() * Mat[0].size()) / 10);
-}
-
-void win(unsigned & Player, unsigned & Score1, unsigned & Score2) {
+void win(unsigned Player, unsigned & Score1, unsigned & Score2) {
         cout << "Félicitations au Joueur " << Player << " ! Il gagne avec " << Score1 << " points contre " << Score2 << "points." << endl;
 }
 
@@ -391,7 +391,6 @@ int ppal () {
       CTerminalSize WindowSize;
       getWindowSize(WindowSize);
       InitMat(Mat, WindowSize.first - 6,WindowSize.second - 2,Player1,Player2);
-      unsigned MaxPlays = getMaxPlays(Mat);
       ShowMatrix(Mat);
       char Saisie;
       set_input_mode();
@@ -426,24 +425,5 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-
-/* Exemple de menu pour les noobs :
- *
- *  cout << "menu :" << endl << "1. Pates " << endl << "2. PIzza " << endl ;
-    int choix;
-    cin >> choix;
-    switch (choix) {
-    case 1:
-        cout << "Vs avez choisi des pates" << endl;
-        break;
-    case 2:
-        cout << "Vous avez choisi la pizza." << endl;
-    default:
-        cout << "Ce choix n'est pas disponible !" <<endl;
-        break;
-    }
-
-
-    */
 
 
