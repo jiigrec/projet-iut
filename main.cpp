@@ -9,11 +9,18 @@
 #include <stdio.h> 
 #include <random>
 #include "sound.h"
+#include <fstream>
+#include <iomanip>
+#include <string>
+#include <map>
 
 using namespace std;
 
 
 //Temporaire, a changer avec les fichiers de config
+const vector <string> VParamChar {"KTokenPlayer1", "KTokenPlayer2"};
+const vector <string> VParamString {"KColorPlayer1", "KColorPlayer2"};
+const vector <string> VParamUnsigned {"KSizeLine", "KSizeSpace"};
 const char KUP ('z');
 const char KDOWN ('s');
 const char KLEFT ('q');
@@ -33,6 +40,12 @@ const char KPlayerDown ('v');
 const char KPlayerLeft ('<');
 const char KPlayerRight ('>');
 
+//classe myparams
+struct CMyParam {
+    map <string, char> MapParamChar;
+    map <string, unsigned> MapParamUnsigned;
+    map <string, string> MapParamString;
+};
 
 void ClearScreen ()
 {
@@ -48,6 +61,35 @@ const string KBleu    ("34");
 const string KMAgenta ("35");
 const string KCyan    ("36");
 
+void LoadParams(CMyParam & MyParams) {
+    ifstream ifs("config.yalm");
+    string str;
+    char c;
+    unsigned nb;
+    for(string cle; ifs >> cle;) {
+        if (find(VParamChar.begin(), VParamChar.end(), cle) != VParamChar.end()) {
+            ifs >> c;
+            MyParams.MapParamChar[cle] = c;
+            getline(ifs, str);
+        }
+        else if (find(VParamUnsigned.begin(), VParamUnsigned.end(), cle) ,VParamUnsigned.end()) {
+            ifs >> nb;
+            MyParams.MapParamUnsigned[cle] = nb ;
+        }
+        else if(find(VParamString.begin(), VParamString.end(), cle) ,VParamString.end()) {
+            ifs >> str;
+            MyParams.MapParamString[cle] = str ;
+        }
+    }
+}
+
+template <typename T, typename U>
+void ShowMap (const map <T, U>& MyMap) {
+    for ( const auto & Val : MyMap) {
+        cout << Val.first << " " << Val.second << endl;
+        cout << endl;
+    }
+}
 
 void Couleur (const string & coul)
 {
