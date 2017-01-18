@@ -75,8 +75,8 @@ CPosition Player1;
 CPosition Player2;
 unsigned ScoreJ1;
 unsigned ScoreJ2;
-int randomFrequency;
-int randomCounter;
+int randomFrequency = 1;
+int randomCounter = 0;
 
 //Variables qui gardent le temps
 unsigned long Time;
@@ -119,23 +119,25 @@ pair <unsigned, string> displayMenu( vector<string> & Items) {
         }
  }
 
-vector<string> getDirectoryContents(string & Directory) {
-
-    //Donne la liste des fichiers contenus dans un dossier et les donne dans un vcteur.
-
-   DIR           *d;
+vector<string> getDirectoryContents() {
+    vector<string> Langues;
+    /* Source : http://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c */
+   DIR  *d;
   struct dirent *dir;
-  d = opendir(".");
+  d = opendir("./langue");
   if (d)
   {
+    string File;
     while ((dir = readdir(d)) != NULL)
     {
-      printf("%s\n", dir->d_name);
+      File = dir->d_name;
+      if (File.find(".yaml") < File.size())
+          Langues.push_back(File);
     }
 
     closedir(d);
   }
-
+    return Langues;
 }
 
 
