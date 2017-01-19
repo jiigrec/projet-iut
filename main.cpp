@@ -101,7 +101,7 @@ vector<string> getLanguages() {
    /* Source : http://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c */
    DIR  *d;
   struct dirent *dir;
-  d = opendir("./Nos_fichiers/langue");
+  d = opendir("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/langue");
   if (d)
   {
     string File;
@@ -120,7 +120,7 @@ vector<string> getLanguages() {
 
 //Définit les chaines localisées en fonction d'un fichier de langue
 void setLanguage(string & LanguageFile) {
-    ifstream stream ("Nos_fichiers/langue/" + LanguageFile);
+    ifstream stream ("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/langue/" + LanguageFile);
     string str;
     string key;
     while (!stream.eof()) {
@@ -146,7 +146,7 @@ void setLanguageFromLocale(string & Locale) {
 
 //Charge les paramètres du fichier config.yaml
 void LoadParams(CMyParam & MyParams) {
-    ifstream stream("Nos_fichiers/config.yaml");
+    ifstream stream("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/config.yaml");
     string str;
     char c;
     string key;
@@ -235,7 +235,7 @@ string getColor(string & color) {
 //Affiche le fichier d'aide
  void showHelp() {
      ClearScreen();
-     ifstream stream ("Nos_fichiers/langue/" + Settings.GameStrings["HelpFile"]);
+     ifstream stream ("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/langue/" + Settings.GameStrings["HelpFile"]);
      string str;
      while (!stream.eof()) {
          getline(stream, str);
