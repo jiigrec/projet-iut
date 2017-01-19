@@ -373,12 +373,12 @@ void set_input_mode (void)
 
 //Démarre le chronomètre
 void startTimer() {
-    Time = clock();
+    Time = time(NULL);
 }
 
 //Donne le nombre de secondes écoulées depuis le début du chrono
 unsigned getSecondsElapsed() {
-    return ((unsigned) clock() - Time) / CLOCKS_PER_SEC;
+    return ((unsigned) time(NULL) - Time);
 }
 
 //Donne le temps restant des joueurs
@@ -398,7 +398,7 @@ void gamePause() {
         cin >> c;
     }
     set_input_mode();
-    Time = clock() - elapsedTime * CLOCKS_PER_SEC;
+    Time = time(NULL) - elapsedTime;
     ClearScreen();
 }
 
