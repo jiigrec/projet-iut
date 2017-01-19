@@ -94,6 +94,28 @@ unsigned long Time;
 unsigned randomCounter = 0;
 
 
+//Fonctions de son
+#ifdef __APPLE__
+    void playMusic() {
+        system("afplay ../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/music.wav");
+    }
+
+    void stopMusic() {
+        system("killall afplay");
+    }
+#else
+    void playMusic() {
+        system("aplay ../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/music.wav");
+    }
+
+    void stopMusic() {
+        system("killall aplay");
+    }
+#endif
+
+
+
+
 
 //Donne la liste des fichiers de langue présents
 vector<string> getLanguages() {
