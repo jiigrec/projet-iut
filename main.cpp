@@ -251,7 +251,18 @@ string getColor(string & color) {
  }
 
  void languageMenu() {
-
+    vector<string> languages = getLanguages();
+    cout << Settings.GameStrings["ChangeLanguage"] << " :" << endl;
+    int choix = 0;
+    string str;
+    for (unsigned i = 0; i < languages.size(); ++i) {
+        str = languages[i];
+        str.erase(str.size() - 4, 4);
+        cout << i+1 << " " << str << endl;
+    }
+    while (choix < 1 || choix > (int) languages.size())
+        cin >> choix;
+    setLanguage(languages[choix - 1]);
  }
 
 //Affiche le fichier d'aide
