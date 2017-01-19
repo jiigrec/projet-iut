@@ -408,8 +408,8 @@ void popFood(CMatrix & Mat) {
         randomCounter = 0;
         random_device rd;
         mt19937 mt(rd());
-        uniform_int_distribution<int> vert(1, Mat.size());
-        uniform_int_distribution<int> hor(1, Mat[0].size());
+        uniform_int_distribution<int> vert(0, Mat.size() - 1);
+        uniform_int_distribution<int> hor(0, Mat[0].size() - 1);
         CPosition food = pair<int, int> (vert(mt), hor(mt));
         while (food == Player1 || food == Player2) {
             food = pair<int, int> (vert(mt), hor(mt));
@@ -591,6 +591,7 @@ bool ppal () {
       set_input_mode();
       ScoreJ1 = 0;
       ScoreJ2 = 0;
+      startTimer();
       while(Playing) {
             ShowMatrix(Mat);
             read (STDIN_FILENO, &Saisie, 1); //Lit la touche pressée.
