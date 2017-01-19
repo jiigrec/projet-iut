@@ -1,3 +1,13 @@
+/*!
+ * \file   main.cpp
+ * \authors Jean-Yves Roda, Marc-Antoine Cartier, Antoine De La Fuente, Rémi Brizon
+ * \date Vendredi 20 Janvier 2017
+ * \brief   Terminal's color management
+ *          beginning of the project titled "catch me if you can"
+ */
+
+
+
 #include <iostream>
 #include <istream>
 #include <vector>
@@ -16,21 +26,26 @@
 
 using namespace std;
 
-
-//Index des options de configuration
+/*!
+ * \Index des options de configuration
+ */
 const vector <string> VControls {"J1Up", "J1Down", "J1Left", "J1Right", "J2Up", "J2Down", "J2Left", "J2Right", "pause"};
 const vector <string> VColors {"ColorPlayer1", "ColorPlayer2","ColorFood"};
 const string languageSetting = "langue";
 const string foodSetting = "food";
 
-//Constantes de l'affichage du personnage et des blancs
+/*!
+ * \Constantes de l'affichage du personnage et des blancs
+ */
 const char KPlayerUp ('^');
 const char KPlayerDown ('v');
 const char KPlayerLeft ('<');
 const char KPlayerRight ('>');
 const char KEmpty (' ');
 
-//classe myparams
+/*!
+ * \classe regroupant les parametres à charger dans le fichier yaml
+ */
 struct CMyParam {
     map <string, char> Controls;
     char food;
@@ -43,14 +58,18 @@ struct CMyParam {
 };
 
 
-//Efface l'écran
+/*!
+ * \Efface l'écran du terminal
+ */
 void ClearScreen ()
 {
     cout << "\033[H\033[2J";
 }
 
 
-//Liste des couleurs disponibles
+/*!
+ * \Liste des couleurs disponibles
+ */
 const string KReset   ("0");
 const string KNoir    ("30");
 const string KRouge   ("31");
@@ -60,41 +79,52 @@ const string KBleu    ("34");
 const string KMAgenta ("35");
 const string KCyan    ("36");
 
-
-//Change la couleur des prochains caractères affichés
+/*!
+ * \Change la couleur des prochains caractères affichés
+ */
 void Couleur (const string & coul)
 {
     cout << "\033[" << coul <<"m";
 }
 
 
-//Types de la grille de jeu
+/*!
+ * \Listes d'aliass permettant de creer la matrice du jeu et de determiner les coordonnées dans la matrice
+ */
 typedef vector <char> CVLine; // un type représentant une ligne de la grille
 typedef vector <CVLine> CMatrix; // un type représentant la grille
 typedef pair   <unsigned, unsigned> CPosition; // un type représentant une coordonnée dans la grille
 
 typedef pair <unsigned, unsigned> CTerminalSize; // Un type qui représente la taille de la fenetre
 
-//Stockage des paramètres du Terminal, pour changer le mode entre canonique et non canonique
+/*!
+ * \Stockage des paramètres du Terminal, pour changer le mode entre canonique et non canonique
+ */
 struct termios saved_attributes;
 
-//Variable contenant les paramètres
+/*!
+ * \Variable contenant les paramètres
+ */
 CMyParam Settings;
 
-
-//Variables utilisées pendant le jeu
+/*!
+ * \Variables utilisées pendant le jeu
+ */
 CMatrix Mat;
 CPosition Player1;
 CPosition Player2;
 unsigned ScoreJ1;
 unsigned ScoreJ2;
 
-//Variables qui gardent le temps
+/*!
+ * \Variables qui gardent le temps
+ */
 unsigned long Time;
 unsigned randomCounter = 0;
 
-
-//Fonctions de son
+/*!
+ * \Fonctions pour entendre la musique du jeu 
+ */
 #ifdef __APPLE__
     void playMusic() {
         system("afplay ../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/music.wav");
@@ -116,8 +146,9 @@ unsigned randomCounter = 0;
 
 
 
-
-//Donne la liste des fichiers de langue présents
+/*!
+ * \Donne la liste des fichiers de langue présents
+ */
 vector<string> getLanguages() {
    vector<string> Langues;
    /* Source : http://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c */
@@ -139,8 +170,9 @@ vector<string> getLanguages() {
     return Langues;
 }
 
-
-//Définit les chaines localisées en fonction d'un fichier de langue
+/*!
+ * \Définit les chaines localisées en fonction d'un fichier de langue
+ */
 void setLanguage(string & LanguageFile) {
     ifstream stream ("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/langue/" + LanguageFile);
     string str;
@@ -154,8 +186,9 @@ void setLanguage(string & LanguageFile) {
     }
     stream.close();
 }
-
-//Définit la langue à partir d'une locale simplifiée, comme FR pour francais
+/*!
+ * \Définit la langue à partir d'une locale simplifiée, comme FR pour francais
+ */
 void setLanguageFromLocale(string & Locale) {
       vector<string> Languages = getLanguages();
       for (unsigned i = 0; i < Languages.size(); ++i) {
@@ -166,7 +199,9 @@ void setLanguageFromLocale(string & Locale) {
       }
 }
 
-//Charge les paramètres du fichier config.yaml
+/*!
+ * \Charge les paramètres du fichier config.yaml
+ */
 void LoadParams(CMyParam & MyParams) {
     ifstream stream("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/config.yaml");
     string str;
@@ -206,7 +241,9 @@ void LoadParams(CMyParam & MyParams) {
     stream.close();
 }
 
-//Défénit en mémoire les valeurs par défaut de configuration
+/*!
+ * \Définit en mémoire les valeurs par défaut de configuration
+ */
 void setDefaults(CMyParam & MyParams) {
    MyParams.difficulty = 1;
    MyParams.IA = false;
@@ -214,8 +251,9 @@ void setDefaults(CMyParam & MyParams) {
    MyParams.endTime = 60;
 }
 
-
-//Donne le code couleur à partir d'une couleur en language commun
+/*!
+ * \Donne le code couleur à partir d'une couleur en language commun
+ */
 string getColor(string & color) {
     if (color ==  "noir")
         return KNoir;
@@ -234,8 +272,9 @@ string getColor(string & color) {
     return KReset;
 }
 
-
- //Règle la difficulté du jeu
+/*!
+ * \Règle la difficulté du jeu
+ */
  void setDifficulty() {
      int choix = 0;
      while (choix < 1 || choix > 3) {
@@ -251,23 +290,12 @@ string getColor(string & color) {
  }
 
  void languageMenu() {
-     ClearScreen();
-    vector<string> languages = getLanguages();
-    cout << Settings.GameStrings["ChangeLanguage"] << " :" << endl;
-    int choix = 0;
-    string str;
-    for (unsigned i = 0; i < languages.size(); ++i) {
-        str = languages[i];
-        str.erase(str.size() - 4, 4);
-        cout << i+1 << " " << str << endl;
-    }
-    while (choix < 1 || choix > (int) languages.size())
-        cin >> choix;
-    setLanguage(languages[choix - 1]);
-    ClearScreen();
+
  }
 
-//Affiche le fichier d'aide
+/*!
+ * \Affiche le fichier d'aide
+ */
  void showHelp() {
      ClearScreen();
      ifstream stream ("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/langue/" + Settings.GameStrings["HelpFile"]);
@@ -284,7 +312,9 @@ string getColor(string & color) {
 
  }
 
-//Enregistre les options choisies
+/*!
+ * \Enregistre les options choisies
+ */
  bool setOption(int & Choix) {
      switch (Choix) {
      case 1:
@@ -308,7 +338,9 @@ string getColor(string & color) {
  }
 
 
- //Affiche le menu principal
+/*!
+ * \Affiche le menu principal
+ */
 bool mainMenu() {
     bool ready = false;
     while (!ready) {
@@ -372,23 +404,30 @@ void set_input_mode (void)
 /* Fin du code copié */
 
 
-//Démarre le chronomètre
+/*!
+ * \Démarre le chronomètre
+ */
 void startTimer() {
     Time = time(NULL);
 }
 
-//Donne le nombre de secondes écoulées depuis le début du chrono
+/*!
+ * \Donne le nombre de secondes écoulées depuis le début du chrono
+ */
 unsigned getSecondsElapsed() {
     return ((unsigned) time(NULL) - Time);
 }
 
-//Donne le temps restant des joueurs
+/*!
+ * \Donne le temps restant des joueurs
+ */
 int getTimeLeft() {
     return Settings.endTime - getSecondsElapsed();
 }
 
-
-//Mets le jeu en pause
+/*!
+ * \Mets le jeu en pause
+ */
 void gamePause() {
     ClearScreen();
     unsigned elapsedTime = getSecondsElapsed();
@@ -403,7 +442,9 @@ void gamePause() {
     ClearScreen();
 }
 
-//Fait apparaitre un trésor sur la carte
+/*!
+ * \Fait apparaitre un trésor sur la carte
+ */
 void popFood(CMatrix & Mat) {
     if (randomCounter == Settings.randomFrequency) {
         randomCounter = 0;
@@ -420,7 +461,9 @@ void popFood(CMatrix & Mat) {
         ++randomCounter;
 }
 
-//Affiche l'interface du jeu ainsi que la grille
+/*!
+ * \Affiche l'interface du jeu ainsi que la grille
+ */
 void  ShowMatrix (const CMatrix & Mat) {
     ClearScreen();
     Couleur(KReset);
@@ -456,8 +499,9 @@ void  ShowMatrix (const CMatrix & Mat) {
     cout << endl;
 }
 
-
-//Initialise la grille de jeu
+/*!
+ * \Initialise la grille de jeu
+ */
 void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & PosPlayer1, CPosition & PosPlayer2) {
     Mat.resize(NbLine);
     CVLine Line;
@@ -474,14 +518,16 @@ void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & Pos
     Mat[PosPlayer2.first][PosPlayer2.second] = KPlayerUp;
 }
 
-
-//Retourne si le joueur est le joueur 1 ou non, en fonction de sa position
+/*!
+ * \Retourne si le joueur est le joueur 1 ou non, en fonction de sa position
+ */
 bool isFirstPlayer(CPosition & Pos) {
     return (Pos == Player1); //Expression booléenne
 }
 
-
-//Fonction qui gère les collisions
+/*!
+ * \Fonction qui gère les collisions durant la partie
+ */
 bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & PosPlayer) {
     switch (Object) {
     case KPlayerDown:
@@ -517,8 +563,9 @@ bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & Po
     return true;
 }
 
-
-//Fonction pour déplacer un joueur
+/*!
+ * \Fonction qui gère les déplacement un joueur durant la partie
+ */
 void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
     CPosition OldPos = Pos;
     char Player;
@@ -546,7 +593,9 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
     Mat[Pos.first][Pos.second] = Player;
 }
 
-//Fonction pour lire les touches pressées
+/*!
+ * \Fonction pour lire les touches pressées durant la partie
+ */
 void readInput(char & Input) {
     if (Input == Settings.Controls["J1Up"] || Input == Settings.Controls["J1Down"] || Input == Settings.Controls["J1Left"] || Input == Settings.Controls["J1Right"])
         MoveToken(Mat, Input, Player1);
@@ -556,8 +605,9 @@ void readInput(char & Input) {
         gamePause();
 }
 
-
-//Fonction qui donne la taille de la fenêtre
+/*!
+ * \Fonction qui permet d'adapter le jeu sur tout type d'écran
+ */
 void getWindowSize(CTerminalSize & Size) {
     struct winsize size;
     ioctl(STDOUT_FILENO,TIOCGWINSZ,&size);
@@ -565,7 +615,9 @@ void getWindowSize(CTerminalSize & Size) {
     Size.second = size.ws_col;
 }
 
-// Affiche le menu des résultats
+/*!
+ * \Affiche le menu des résultats
+ */
 bool win(unsigned Player, unsigned & Score1, unsigned & Score2) {
         cout << Settings.GameStrings["CongratulationsDialog"] << Player << " ! "
              << Settings.GameStrings["WinDialog"] << Score1
@@ -582,8 +634,9 @@ bool win(unsigned Player, unsigned & Score1, unsigned & Score2) {
         }
 }
 
-
-// Boucle d'une partie jouée
+/*!
+ * \Boucle d'une partie jouée
+ */
 bool ppal () {
       bool Playing = true;
       CTerminalSize WindowSize;
