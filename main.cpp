@@ -18,7 +18,7 @@ using namespace std;
 
 
 //Index des options de configuration
-const vector <string> VControls {"J1Up", "J1Down", "J1Left", "J2Right", "J2Up", "J2Down", "J2Left", "J2Right", "pause"};
+const vector <string> VControls {"J1Up", "J1Down", "J1Left", "J1Right", "J2Up", "J2Down", "J2Left", "J2Right", "pause"};
 const vector <string> VColors {"ColorPlayer1", "ColorPlayer2","ColorFood"};
 const string languageSetting = "langue";
 const string foodSetting = "food";
@@ -77,12 +77,6 @@ typedef pair <unsigned, unsigned> CTerminalSize; // Un type qui représente la t
 
 //Stockage des paramètres du Terminal, pour changer le mode entre canonique et non canonique
 struct termios saved_attributes;
-
-/*Variables de configuration, initialisées avec leurs valeurs par défaut
-bool IA = false;
-unsigned difficulty = 1;
-int randomFrequency = 3; */
-
 
 //Variable contenant les paramètres
 CMyParam Settings;
@@ -613,6 +607,7 @@ bool ppal () {
 
 int main()
 {
+    ClearScreen();
     LoadParams(Settings);
     setDefaults(Settings);
     bool playing = true;
