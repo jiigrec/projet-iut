@@ -1,0 +1,5 @@
+<map id="InitMat" name="InitMat">
+<area shape="rect" id="node2" href="$main_8cpp.html#a81a4a924185c81f623edfb38a4f629ed" title="Espace vide. " alt="" coords="133,5,202,32"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a9e68aa6a6900f7f9567ca2f689ae0bdc" title="Joueur allant en bas. " alt="" coords="116,56,219,83"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a24d8d97414c569e372f4ff5c0a7e2fa0" title="Joueur allant en haut. " alt="" coords="125,107,210,133"/>
+</map>

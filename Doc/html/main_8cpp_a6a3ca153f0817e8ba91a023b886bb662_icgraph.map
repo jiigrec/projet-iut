@@ -1,0 +1,13 @@
+<map id="ClearScreen" name="ClearScreen">
+<area shape="rect" id="node2" href="$main_8cpp.html#a28af16941c845fe85c0ad486f67928c1" title="Affiche le menu de selection de la difficulte. " alt="" coords="155,5,247,32"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Fonction principale. " alt="" coords="572,157,623,184"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#a3b00a9c78e94cf30a9961b377729622c" title="Affiche le menu de selection de la langue. " alt="" coords="148,56,255,83"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#aec315d77f5c38417289a0e311d2a9d31" title="Affiche le fichier d&#39;aide. " alt="" coords="161,107,241,133"/>
+<area shape="rect" id="node8" href="$main_8cpp.html#aa5642769dce9d51ebe5be75b3dd5007e" title="Met le jeu en pause. " alt="" coords="156,208,247,235"/>
+<area shape="rect" id="node10" href="$main_8cpp.html#af5049d09a64bd19378a243787b57d027" title="Fonction principale, contient la boucle de jeu. " alt="" coords="459,259,506,285"/>
+<area shape="rect" id="node11" href="$main_8cpp.html#aa1e1ee1a111de597ed2250892119fad2" title="Affiche l&#39;interface principale du jeu. " alt="" coords="303,309,393,336"/>
+<area shape="rect" id="node12" href="$main_8cpp.html#a1ad2098fbb826463ee14c62abf400789" title="Fonction appelee a la fin du jeu, pour afficher le gagnant. " alt="" coords="327,360,369,387"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#ad8588f4f4d24ec38f448e679a68cd62f" title="Regle l&#39;option selectionnee. " alt="" coords="309,69,387,96"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#aaed5cc5349863a6b8a7a86c74f28263a" title="Affiche le menu principal. " alt="" coords="441,95,524,121"/>
+<area shape="rect" id="node9" href="$main_8cpp.html#a6df6aa26bcfa8c1d0fcda8b8b8075abc" title="Lis la saisie clavier. " alt="" coords="310,208,386,235"/>
+</map>

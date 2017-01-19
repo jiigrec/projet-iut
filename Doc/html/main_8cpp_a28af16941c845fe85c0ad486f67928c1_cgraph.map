@@ -1,0 +1,11 @@
+<map id="setDifficulty" name="setDifficulty">
+<area shape="rect" id="node2" href="$main_8cpp.html#a6a3ca153f0817e8ba91a023b886bb662" title="Efface l&#39;écran du terminal. " alt="" coords="145,183,240,209"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#ae421976620c052c8350660039b8cb3bd" title="Code couleur nul (reinitialisation) " alt="" coords="296,5,363,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a660c3e68e5967e553ae7fd9fb7073bbe" title="Code couleur noir. " alt="" coords="302,56,357,83"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a09f08ffca2080e9ca9c050093a2ca6d5" title="Code couleur rouge. " alt="" coords="295,107,364,133"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#a1cdcc3e3fe7660a6f85532bb0d228fee" title="Code couleur vert. " alt="" coords="302,157,357,184"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#af02736496532ff1e9c9137691bfb1e07" title="Code couleur jaune. " alt="" coords="296,208,363,235"/>
+<area shape="rect" id="node8" href="$main_8cpp.html#a566a648bad2891bdf1d5746fed6fc6d3" title="Code couleur bleu. " alt="" coords="301,259,358,285"/>
+<area shape="rect" id="node9" href="$main_8cpp.html#a0eb078e8b0f7aa0c81169197965bbdd2" title="Code couleur magenta. " alt="" coords="288,309,371,336"/>
+<area shape="rect" id="node10" href="$main_8cpp.html#aa608863de5cd86b7b36f68a1189222cb" title="Code couleur cyan. " alt="" coords="298,360,361,387"/>
+</map>

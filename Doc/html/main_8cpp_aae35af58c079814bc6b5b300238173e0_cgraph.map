@@ -1,0 +1,7 @@
+<map id="checkEat" name="checkEat">
+<area shape="rect" id="node2" href="$main_8cpp.html#a9e68aa6a6900f7f9567ca2f689ae0bdc" title="Joueur allant en bas. " alt="" coords="131,5,233,32"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a24d8d97414c569e372f4ff5c0a7e2fa0" title="Joueur allant en haut. " alt="" coords="139,56,225,83"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a0e0be1c05bbe1c9a11c01d5b8b558a70" title="Joueur allant a gauche. " alt="" coords="137,107,227,133"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#acedb4c0046e67a1ce8618258be548e07" title="Joueur allant à droite. " alt="" coords="133,157,231,184"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#a57652e6682b5bc35b01edc05bfa2af45" title="Fonction pour determiner le joueur en fonction d&#39;une position. " alt="" coords="135,208,229,235"/>
+</map>

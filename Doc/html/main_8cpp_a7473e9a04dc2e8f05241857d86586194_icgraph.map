@@ -1,0 +1,6 @@
+<map id="stopMusic" name="stopMusic">
+<area shape="rect" id="node2" href="$main_8cpp.html#aa5642769dce9d51ebe5be75b3dd5007e" title="Met le jeu en pause. " alt="" coords="136,5,227,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#af5049d09a64bd19378a243787b57d027" title="Fonction principale, contient la boucle de jeu. " alt="" coords="399,31,445,57"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a6df6aa26bcfa8c1d0fcda8b8b8075abc" title="Lis la saisie clavier. " alt="" coords="275,5,351,32"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Fonction principale. " alt="" coords="493,31,544,57"/>
+</map>

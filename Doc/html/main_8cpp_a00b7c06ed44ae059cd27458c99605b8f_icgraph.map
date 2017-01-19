@@ -1,0 +1,8 @@
+<map id="getLanguages" name="getLanguages">
+<area shape="rect" id="node2" href="$main_8cpp.html#a8738b59733022baef4ff40e331c09554" title="Definit la langue du jeu a partir d&#39;une locale. " alt="" coords="156,5,320,32"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a3b00a9c78e94cf30a9961b377729622c" title="Affiche le menu de selection de la langue. " alt="" coords="185,56,291,83"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#af700f5ec6a814c6f4dee71b71c54869e" title="Charge les parametres du jeu a partir du fichier config.yml. " alt="" coords="495,5,589,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Fonction principale. " alt="" coords="637,31,688,57"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#ad8588f4f4d24ec38f448e679a68cd62f" title="Regle l&#39;option selectionnee. " alt="" coords="368,56,447,83"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#aaed5cc5349863a6b8a7a86c74f28263a" title="Affiche le menu principal. " alt="" coords="501,56,583,83"/>
+</map>

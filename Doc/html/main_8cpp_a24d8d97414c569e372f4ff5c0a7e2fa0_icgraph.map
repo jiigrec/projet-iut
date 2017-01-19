@@ -1,0 +1,8 @@
+<map id="KPlayerUp" name="KPlayerUp">
+<area shape="rect" id="node2" href="$main_8cpp.html#a67a5b91aec2208cb14e67a4aa0659643" title="Initialise la grille de jeu. " alt="" coords="278,5,341,32"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#aae35af58c079814bc6b5b300238173e0" title="Fonction pour gerer les actions du joueur. " alt="" coords="139,56,216,83"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#adb6ae9f5ad188e663124a9afa23467bf" title="Deplace un joueur. " alt="" coords="264,56,355,83"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#af5049d09a64bd19378a243787b57d027" title="Fonction principale, contient la boucle de jeu. " alt="" coords="527,31,573,57"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Fonction principale. " alt="" coords="621,31,672,57"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#a6df6aa26bcfa8c1d0fcda8b8b8075abc" title="Lis la saisie clavier. " alt="" coords="403,56,479,83"/>
+</map>

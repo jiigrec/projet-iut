@@ -1,0 +1,7 @@
+<map id="reset_input_mode" name="reset_input_mode">
+<area shape="rect" id="node2" href="$main_8cpp.html#a224cd3d46cfe5381606415ce3585b91f" title="Change le mode d&#39;entree en mode non canonique. " alt="" coords="179,56,293,83"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#aa5642769dce9d51ebe5be75b3dd5007e" title="Met le jeu en pause. " alt="" coords="341,5,432,32"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#af5049d09a64bd19378a243787b57d027" title="Fonction principale, contient la boucle de jeu. " alt="" coords="604,56,651,83"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a6df6aa26bcfa8c1d0fcda8b8b8075abc" title="Lis la saisie clavier. " alt="" coords="480,5,556,32"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Fonction principale. " alt="" coords="699,56,749,83"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="getSecondsElapsed" name="getSecondsElapsed">
+<area shape="rect" id="node2" href="$main_8cpp.html#a77241579fb9d12bcfefac569bde45fea" title="Donne le temps restant aux joueurs. " alt="" coords="192,56,283,83"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#aa5642769dce9d51ebe5be75b3dd5007e" title="Met le jeu en pause. " alt="" coords="192,107,283,133"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#aa1e1ee1a111de597ed2250892119fad2" title="Affiche l&#39;interface principale du jeu. " alt="" coords="331,5,421,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#af5049d09a64bd19378a243787b57d027" title="Fonction principale, contient la boucle de jeu. " alt="" coords="469,56,516,83"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Fonction principale. " alt="" coords="564,56,615,83"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#a6df6aa26bcfa8c1d0fcda8b8b8075abc" title="Lis la saisie clavier. " alt="" coords="338,107,414,133"/>
+</map>

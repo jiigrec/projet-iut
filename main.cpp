@@ -26,25 +26,28 @@
 
 using namespace std;
 
-/*!
- * \Index des options de configuration
- */
+//! Liste des options des commandes
 const vector <string> VControls {"J1Up", "J1Down", "J1Left", "J1Right", "J2Up", "J2Down", "J2Left", "J2Right", "pause"};
+//! Liste des options de couleur
 const vector <string> VColors {"ColorPlayer1", "ColorPlayer2","ColorFood"};
+//! Option de langue
 const string languageSetting = "langue";
+//! Option du trésor a "manger"
 const string foodSetting = "food";
 
-/*!
- * \Constantes de l'affichage du personnage et des blancs
- */
+//! Joueur allant en haut
 const char KPlayerUp ('^');
+//! Joueur allant en bas
 const char KPlayerDown ('v');
+//! Joueur allant a gauche
 const char KPlayerLeft ('<');
+//! Joueur allant à droite
 const char KPlayerRight ('>');
+//! Espace vide
 const char KEmpty (' ');
 
 /*!
- * \classe regroupant les parametres à charger dans le fichier yaml
+ * \struct Structure regroupant les parametres du jeu
  */
 struct CMyParam {
     map <string, char> Controls;
@@ -59,7 +62,7 @@ struct CMyParam {
 
 
 /*!
- * \Efface l'écran du terminal
+ * \brief Efface l'écran du terminal
  */
 void ClearScreen ()
 {
@@ -67,20 +70,26 @@ void ClearScreen ()
 }
 
 
-/*!
- * \Liste des couleurs disponibles
- */
+//! Code couleur nul (reinitialisation)
 const string KReset   ("0");
+//! Code couleur noir
 const string KNoir    ("30");
+//! Code couleur rouge
 const string KRouge   ("31");
+//! Code couleur vert
 const string KVert    ("32");
+//! Code couleur jaune
 const string KJaune   ("33");
+//! Code couleur bleu
 const string KBleu    ("34");
+//! Code couleur magenta
 const string KMAgenta ("35");
+//! Code couleur cyan
 const string KCyan    ("36");
 
 /*!
- * \Change la couleur des prochains caractères affichés
+ * \brief Change la couleur des prochains caractères affichés
+ * \param[in] Code de la couleur à afficher
  */
 void Couleur (const string & coul)
 {
@@ -89,65 +98,77 @@ void Couleur (const string & coul)
 
 
 /*!
- * \Listes d'aliass permettant de creer la matrice du jeu et de determiner les coordonnées dans la matrice
+ * \brief Type représentant une ligne dans la grille du jeu
  */
-typedef vector <char> CVLine; // un type représentant une ligne de la grille
-typedef vector <CVLine> CMatrix; // un type représentant la grille
+typedef vector <char> CVLine;
+/*!
+ * \brief Type représentant la grille du jeu
+ */
+typedef vector <CVLine> CMatrix;
+/*!
+ * \brief Type représentant la position d'un joueur dans la grille
+ */
 typedef pair   <unsigned, unsigned> CPosition; // un type représentant une coordonnée dans la grille
-
+/*!
+ * \brief Type représentant la taille de la fenetre
+ */
 typedef pair <unsigned, unsigned> CTerminalSize; // Un type qui représente la taille de la fenetre
 
-/*!
- * \Stockage des paramètres du Terminal, pour changer le mode entre canonique et non canonique
- */
+//! Configuration du terminal, notemment le mode d'entrée
 struct termios saved_attributes;
 
-/*!
- * \Variable contenant les paramètres
- */
+//! Réglages du jeu
 CMyParam Settings;
 
-/*!
- * \Variables utilisées pendant le jeu
- */
+//! Grille de jeu
 CMatrix Mat;
+//! Position du joueur 1
 CPosition Player1;
+//! Position du joueur 2
 CPosition Player2;
+//! Score du joueur 1
 unsigned ScoreJ1;
+//! Score du joueur 2
 unsigned ScoreJ2;
 
-/*!
- * \Variables qui gardent le temps
- */
+//! Temps au debut du chronometre
 unsigned long Time;
+//! Compteur du generateur ameatoire
 unsigned randomCounter = 0;
 
-/*!
- * \Fonctions pour entendre la musique du jeu 
- */
+
 #ifdef __APPLE__
+    /*!
+     * \brief Fonction pour jouer la musique
+     */
     void playMusic() {
         system("afplay ../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/music.wav &");
     }
-
+    /*!
+     * \brief Fonction pour arreter la musique
+     */
     void stopMusic() {
         system("killall afplay");
     }
 #else
+    /*!
+     * \brief Fonction pour jouer la musique
+     */
     void playMusic() {
         system("aplay ../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/music.wav &");
     }
-
+    /*!
+     * \brief Fonction pour arreter la musique
+     */
     void stopMusic() {
         system("killall aplay");
     }
 #endif
 
 
-
-
 /*!
- * \Donne la liste des fichiers de langue présents
+ * \brief Fonction pour avoir la liste des langues disponibles
+ * \return Un vecteur contenant les langues
  */
 vector<string> getLanguages() {
    vector<string> Langues;
@@ -171,7 +192,8 @@ vector<string> getLanguages() {
 }
 
 /*!
- * \Définit les chaines localisées en fonction d'un fichier de langue
+ * \brief Definit la langue du jeu
+ * \param Le nom du fichier qui contient les parametres de langue
  */
 void setLanguage(string & LanguageFile) {
     ifstream stream ("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/langue/" + LanguageFile);
@@ -186,8 +208,11 @@ void setLanguage(string & LanguageFile) {
     }
     stream.close();
 }
+
+
 /*!
- * \Définit la langue à partir d'une locale simplifiée, comme FR pour francais
+ * \brief Definit la langue du jeu a partir d'une locale
+ * \param La locale de la langue a changer
  */
 void setLanguageFromLocale(string & Locale) {
       vector<string> Languages = getLanguages();
@@ -200,7 +225,8 @@ void setLanguageFromLocale(string & Locale) {
 }
 
 /*!
- * \Charge les paramètres du fichier config.yaml
+ * \brief Charge les parametres du jeu a partir du fichier config.yml
+ * \param Parametres du jeu
  */
 void LoadParams(CMyParam & MyParams) {
     ifstream stream("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/config.yaml");
@@ -242,7 +268,8 @@ void LoadParams(CMyParam & MyParams) {
 }
 
 /*!
- * \Définit en mémoire les valeurs par défaut de configuration
+ * \brief Definit quelques parametres par defaut
+ * \param Parametres du jeu
  */
 void setDefaults(CMyParam & MyParams) {
    MyParams.difficulty = 1;
@@ -252,7 +279,9 @@ void setDefaults(CMyParam & MyParams) {
 }
 
 /*!
- * \Donne le code couleur à partir d'une couleur en language commun
+ * \brief Donne le code couleur d'une couleur
+ * \param La couleur recherchee
+ * \return Le code de la couleur donnee
  */
 string getColor(string & color) {
     if (color ==  "noir")
@@ -273,8 +302,8 @@ string getColor(string & color) {
 }
 
 /*!
- * \Règle la difficulté du jeu
- */
+  * \brief Affiche le menu de selection de la difficulte
+  */
  void setDifficulty() {
      ClearScreen();
      int choix = 0;
@@ -291,6 +320,10 @@ string getColor(string & color) {
      ClearScreen();
  }
 
+
+ /*!
+  * \brief Affiche le menu de selection de la langue
+  */
  void languageMenu() {
      ClearScreen();
      vector<string> languages = getLanguages();
@@ -308,9 +341,9 @@ string getColor(string & color) {
          ClearScreen();
  }
 
-/*!
- * \Affiche le fichier d'aide
- */
+ /*!
+  * \brief Affiche le fichier d'aide
+  */
  void showHelp() {
      ClearScreen();
      ifstream stream ("../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/langue/" + Settings.GameStrings["HelpFile"]);
@@ -328,9 +361,11 @@ string getColor(string & color) {
 
  }
 
-/*!
- * \Enregistre les options choisies
- */
+ /*!
+  * \brief Regle l'option selectionnee
+  * \param Option a regler
+  * \return Si le joueur est pret a jouer ou non
+  */
  bool setOption(int & Choix) {
      switch (Choix) {
      case 1:
@@ -354,8 +389,9 @@ string getColor(string & color) {
  }
 
 
-/*!
- * \Affiche le menu principal
+ /*!
+ * \brief Affiche le menu principal
+ * \return Si le joueur veut jouer ou non
  */
 bool mainMenu() {
     bool ready = false;
@@ -389,11 +425,19 @@ bool mainMenu() {
 http://www.gnu.org/software/libc/manual/html_node/Noncanon-Example.html
 */
 
+
+/*!
+ * \brief Remet le mode d'entree par defaut du programme
+ */
 void reset_input_mode (void)
 {
   tcsetattr (STDIN_FILENO, TCSANOW, &saved_attributes);
 }
 
+
+/*!
+ * \brief Change le mode d'entree en mode non canonique
+ */
 void set_input_mode (void)
 {
   struct termios tattr;
@@ -421,28 +465,30 @@ void set_input_mode (void)
 
 
 /*!
- * \Démarre le chronomètre
+ * \brief Démarre le chronomètre
  */
 void startTimer() {
     Time = time(NULL);
 }
 
 /*!
- * \Donne le nombre de secondes écoulées depuis le début du chrono
+ * \brief Donne le nombre de secondes ecoulées depuis le debut du chronometre
+ * \return Le nombre de seconde ecoulees
  */
 unsigned getSecondsElapsed() {
     return ((unsigned) time(NULL) - Time);
 }
 
 /*!
- * \Donne le temps restant des joueurs
+ * \brief Donne le temps restant aux joueurs
+ * \return Le temps restant
  */
 int getTimeLeft() {
     return Settings.endTime - getSecondsElapsed();
 }
 
 /*!
- * \Mets le jeu en pause
+ * \brief Met le jeu en pause
  */
 void gamePause() {
     stopMusic();
@@ -461,7 +507,8 @@ void gamePause() {
 }
 
 /*!
- * \Fait apparaitre un trésor sur la carte
+ * \brief Fait apparaitre un tresor dans la grille si les conditions sont remplies
+ * \param La grille du jeu
  */
 void popFood(CMatrix & Mat) {
     if (randomCounter == Settings.randomFrequency) {
@@ -480,7 +527,8 @@ void popFood(CMatrix & Mat) {
 }
 
 /*!
- * \Affiche l'interface du jeu ainsi que la grille
+ * \brief Affiche l'interface principale du jeu
+ * \param La grille a afficher
  */
 void  ShowMatrix (const CMatrix & Mat) {
     ClearScreen();
@@ -518,7 +566,12 @@ void  ShowMatrix (const CMatrix & Mat) {
 }
 
 /*!
- * \Initialise la grille de jeu
+ * \brief Initialise la grille de jeu
+ * \param La grille a initialiser
+ * \param Le nombre de lignes
+ * \param Le nombres de colonnes
+ * \param La position du joueur 1
+ * \param La position du joueur 2
  */
 void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & PosPlayer1, CPosition & PosPlayer2) {
     Mat.resize(NbLine);
@@ -537,7 +590,9 @@ void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & Pos
 }
 
 /*!
- * \Retourne si le joueur est le joueur 1 ou non, en fonction de sa position
+ * \brief Fonction pour determiner le joueur en fonction d'une position
+ * \param Position du joueur inconnu
+ * \return Si c'est le joueur 1 ou non
  */
 bool isFirstPlayer(CPosition & Pos) {
     cout << Pos.first << " " << Pos.second << endl;
@@ -546,7 +601,13 @@ bool isFirstPlayer(CPosition & Pos) {
 }
 
 /*!
- * \Fonction qui gère les collisions durant la partie
+ * \brief Fonction pour gerer les actions du joueur
+ * \param Objet mange par le joueur
+ * \param Position de cet objet
+ * \param Caractere du joueur
+ * \param Position du joueur avant de manger
+ * \param Caractere appuye au clavier
+ * \return si le joueur a le droit d'effectuer le deplacement
  */
 bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & PosPlayer, char & Input) {
     switch (Object) {
@@ -585,7 +646,10 @@ bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & Po
 }
 
 /*!
- * \Fonction qui gère les déplacement un joueur durant la partie
+ * \brief Deplace un joueur
+ * \param Grille du jeu
+ * \param Caractere saisi au clavier
+ * \param Position du joueur
  */
 void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
     CPosition OldPos = Pos;
@@ -615,7 +679,8 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
 }
 
 /*!
- * \Fonction pour lire les touches pressées durant la partie
+ * \brief Lis la saisie clavier
+ * \param Saisie du clavier
  */
 void readInput(char & Input) {
     if (Input == Settings.Controls["J1Up"] || Input == Settings.Controls["J1Down"] || Input == Settings.Controls["J1Left"] || Input == Settings.Controls["J1Right"])
@@ -627,7 +692,8 @@ void readInput(char & Input) {
 }
 
 /*!
- * \Fonction qui permet d'adapter le jeu sur tout type d'écran
+ * \brief Fonction pour avoir la taille de la fenetre
+ * \param La variable de taille
  */
 void getWindowSize(CTerminalSize & Size) {
     struct winsize size;
@@ -637,7 +703,11 @@ void getWindowSize(CTerminalSize & Size) {
 }
 
 /*!
- * \Affiche le menu des résultats
+ * \brief Fonction appelee a la fin du jeu, pour afficher le gagnant
+ * \param Le joueur gagnant
+ * \param Le score du gagnant
+ * \param Le score du perdant
+ * \return Si le joueur veut rejouer ou non
  */
 bool win(unsigned Player, unsigned & Score1, unsigned & Score2) {
         cout << Settings.GameStrings["CongratulationsDialog"] << Player << " ! "
@@ -657,7 +727,8 @@ bool win(unsigned Player, unsigned & Score1, unsigned & Score2) {
 }
 
 /*!
- * \Boucle d'une partie jouée
+ * \brief Fonction principale, contient la boucle de jeu
+ * \return Si le joueur veut continuer ou non
  */
 bool ppal () {
       bool Playing = true;
@@ -691,7 +762,10 @@ bool ppal () {
 
 
 
-
+/*!
+ * \brief Fonction principale
+ * \return Le code de sortie du programme
+ */
 int main()
 {
     ClearScreen();

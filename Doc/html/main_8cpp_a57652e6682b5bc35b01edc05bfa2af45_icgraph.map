@@ -1,0 +1,7 @@
+<map id="isFirstPlayer" name="isFirstPlayer">
+<area shape="rect" id="node2" href="$main_8cpp.html#aae35af58c079814bc6b5b300238173e0" title="Fonction pour gerer les actions du joueur. " alt="" coords="148,5,225,32"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#adb6ae9f5ad188e663124a9afa23467bf" title="Deplace un joueur. " alt="" coords="273,5,364,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a6df6aa26bcfa8c1d0fcda8b8b8075abc" title="Lis la saisie clavier. " alt="" coords="412,5,488,32"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#af5049d09a64bd19378a243787b57d027" title="Fonction principale, contient la boucle de jeu. " alt="" coords="536,5,583,32"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Fonction principale. " alt="" coords="631,5,681,32"/>
+</map>
