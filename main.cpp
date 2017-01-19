@@ -127,7 +127,7 @@ unsigned randomCounter = 0;
  */
 #ifdef __APPLE__
     void playMusic() {
-        system("afplay ../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/music.wav");
+        system("afplay ../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/music.wav &");
     }
 
     void stopMusic() {
@@ -135,7 +135,7 @@ unsigned randomCounter = 0;
     }
 #else
     void playMusic() {
-        system("aplay ../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/music.wav");
+        system("aplay ../G1_Brizon_Cartier_DeLaFuente_Roda/Nos_fichiers/music.wav &");
     }
 
     void stopMusic() {
@@ -276,6 +276,7 @@ string getColor(string & color) {
  * \Règle la difficulté du jeu
  */
  void setDifficulty() {
+     ClearScreen();
      int choix = 0;
      while (choix < 1 || choix > 3) {
          cout << Settings.GameStrings["DifficultyChoose"] << endl;
@@ -287,10 +288,24 @@ string getColor(string & color) {
      }
      Settings.difficulty = choix;
      Settings.randomFrequency = 4 - choix;
+     ClearScreen();
  }
 
  void languageMenu() {
-
+     ClearScreen();
+     vector<string> languages = getLanguages();
+         cout << Settings.GameStrings["ChangeLanguage"] << " :" << endl;
+         int choix = 0;
+         string str;
+         for (unsigned i = 0; i < languages.size(); ++i) {
+             str = languages[i];
+             str.erase(str.size() - 4, 4);
+             cout << i+1 << ". " << str << endl;
+         }
+         while (choix < 1 || choix > (int) languages.size())
+             cin >> choix;
+         setLanguage(languages[choix - 1]);
+         ClearScreen();
  }
 
 /*!
@@ -309,6 +324,7 @@ string getColor(string & color) {
      while (c != '1') {
          cin >> c;
      }
+     ClearScreen();
 
  }
 
@@ -524,13 +540,15 @@ void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & Pos
  * \Retourne si le joueur est le joueur 1 ou non, en fonction de sa position
  */
 bool isFirstPlayer(CPosition & Pos) {
+    cout << Pos.first << " " << Pos.second << endl;
+    cout << Player1.first << " " << Player1.second << endl;
     return (Pos == Player1); //Expression booléenne
 }
 
 /*!
  * \Fonction qui gère les collisions durant la partie
  */
-bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & PosPlayer) {
+bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & PosPlayer, char & Input) {
     switch (Object) {
     case KPlayerDown:
     case KPlayerUp:
@@ -546,10 +564,11 @@ bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & Po
         if (PosObject.second < PosPlayer.second && Object == KPlayerRight && Player == KPlayerLeft)
             return false;
         //Ici, un joueur mange l'autre. Sinon, la fonction a déjà fini son éxécution.
-        if (isFirstPlayer(PosPlayer))
-            ScoreJ1 = ScoreJ1 + 5;
+        if (Input == Settings.Controls["J1Up"] || Input == Settings.Controls["J1Down"]
+                || Input == Settings.Controls["J1Left"] || Input == Settings.Controls["J1Right"])
+            ScoreJ1 = ScoreJ1 + 10;
         else
-            ScoreJ2 = ScoreJ2 + 5;
+            ScoreJ2 = ScoreJ2 + 10;
         break;
 
     default:  // Pas un joueur
@@ -590,7 +609,7 @@ void MoveToken (CMatrix & Mat, char Move, CPosition  & Pos) {
     }
 
     if (Mat[Pos.first][Pos.second] != KEmpty)
-        if (!checkEat(Mat[Pos.first][Pos.second], Pos, Mat[OldPos.first][OldPos.second], OldPos))
+        if (!checkEat(Mat[Pos.first][Pos.second], Pos, Mat[OldPos.first][OldPos.second], OldPos, Move))
             Pos = OldPos;
     Mat[Pos.first][Pos.second] = Player;
 }
@@ -629,6 +648,7 @@ bool win(unsigned Player, unsigned & Score1, unsigned & Score2) {
             cout << "2. " << Settings.GameStrings["Quit"] << endl;
             int choix;
             cin >> choix;
+            ClearScreen();
             if (choix == 1)
                 return true;
             if (choix == 2)
