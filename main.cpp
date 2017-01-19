@@ -429,6 +429,7 @@ int getTimeLeft() {
  * \Mets le jeu en pause
  */
 void gamePause() {
+    stopMusic();
     ClearScreen();
     unsigned elapsedTime = getSecondsElapsed();
     reset_input_mode();
@@ -440,6 +441,7 @@ void gamePause() {
     set_input_mode();
     Time = time(NULL) - elapsedTime;
     ClearScreen();
+    playMusic();
 }
 
 /*!
@@ -648,6 +650,7 @@ bool ppal () {
       ScoreJ1 = 0;
       ScoreJ2 = 0;
       startTimer();
+      playMusic();
       while(Playing) {
             ShowMatrix(Mat);
             if (read (STDIN_FILENO, &Saisie, 1) != 0) // Lit la touche pressée, seulement si il n'y a pas d'erreur
@@ -658,6 +661,7 @@ bool ppal () {
       }
       reset_input_mode();
       ClearScreen();
+      stopMusic();
       if (ScoreJ1 > ScoreJ2)
          return win(1, ScoreJ1, ScoreJ2);
       else
