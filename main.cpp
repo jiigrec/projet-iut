@@ -212,37 +212,16 @@ string getColor(string & color) {
     return KReset;
 }
 
- void MenuTuto()
-    {
-      //  AffichFich("MODEDEJEU.txt");
-        char Choix;
-        char quit;
-        cin>>Choix;
-        ClearScreen();
-        switch(Choix)
-        {
-        case'1':
-         //   ShowFile("TUTORIEL.txt");
-            cin>>quit;
-            while(quit!='5')
-                cin>>quit;
-            ClearScreen();
-            break;
-        default:
-            break;
-        }
- }
-
 
  //Règle la difficulté du jeu
  void setDifficulty() {
      int choix = 0;
      while (choix < 1 || choix > 3) {
-         cout << "Choisir la difficulté: " << endl;
-         cout << "1. " << "Facile" << endl;
-         cout << "2. " << "Moyen" << endl;
-         cout << "3. " << "Difficile" << endl;
-         cout << "Entrez votre choix " << ":" << endl;
+         cout << Settings.GameStrings["DifficultyChoose"] << endl;
+         cout << "1. " << Settings.GameStrings["DifficultyEasy"] << endl;
+         cout << "2. " << Settings.GameStrings["DifficultyMedium"] << endl;
+         cout << "3. " << Settings.GameStrings["DifficultyHard"] << endl;
+         cout << Settings.GameStrings["EnterChoice"] << ":" << endl;
          cin >> choix;
      }
      Settings.difficulty = choix;
@@ -263,7 +242,7 @@ string getColor(string & color) {
          cout << str << endl;
      }
      char c = 'y';
-     cout << "Appuyez sur 1 puis entrée pour revenir." << endl;
+     cout << Settings.GameStrings["HelpEnd"] << endl;
      while (c != '1') {
          cin >> c;
      }
@@ -274,22 +253,18 @@ string getColor(string & color) {
  bool setOption(int & Choix) {
      switch (Choix) {
      case 1:
-         Settings.IA = !Settings.IA;
-         return false;
-         break;
-     case 2:
          setDifficulty();
          return false;
          break;
-     case 3:
+     case 2:
          languageMenu();
          return false;
          break;
-     case 4:
+     case 3:
          showHelp();
          return false;
          break;
-     case 5:
+     case 4:
          return true;
      default:
          return true;
@@ -302,25 +277,22 @@ string getColor(string & color) {
 bool mainMenu() {
     bool ready = false;
     while (!ready) {
-        cout << "Menu : " << endl << "1. ";
-        if (Settings.IA)
-            cout << "Mode 1 joueur" << ".";
-        else
-            cout << "Mode 2 joueurs" << ".";
-        cout << " Choisissez pour changer" << "." << endl;
-        cout << "2. " << "Changer difficulté"<<". "<<"Actuellement "<<": " << Settings.difficulty << endl;
-        cout << "3. " << "Changer la langue" << endl;
-        cout << "4. " << "Aide" << endl;
-        cout << "5. " << "Jouer" << endl;
-        cout << "6. " << "Quitter" << endl;
-        cout << "Entrez votre choix :" << endl;
+        cout << "Menu : " << endl;
+        cout << "1. " << Settings.GameStrings["ChangeDifficulty"] << ". " << Settings.GameStrings["Current"] <<": " << Settings.difficulty << endl;
+        cout << "2. " << Settings.GameStrings["ChangeLanguage"] << endl;
+        cout << "3. " << Settings.GameStrings["Help"] << endl;
+        cout << "4. " << Settings.GameStrings["Play"] << endl;
+        cout << "5. " << Settings.GameStrings["Quit"] << endl;
+        cout << Settings.GameStrings["EnterChoice"] << endl;
         int choix;
-        cin >> choix;
-        while (true)
+        while (true) {
+            cin >> choix;
             if (choix == 5)
                 return false;
-            if (choix <= 0 || choix > 5)
+            if (choix <= 0 || choix > 4)
                 continue;
+            break;
+        }
         ready = setOption(choix);
     }
     return true;
@@ -387,7 +359,7 @@ void gamePause() {
     unsigned elapsedTime = getSecondsElapsed();
     reset_input_mode();
     char c = 'y';
-    cout << "Jeu en pause. Appuyez sur 1 puis entrée pour reprendre." << endl;
+    cout << Settings.GameStrings["PauseDialog"] << endl;
     while (c != '1') {
         cin >> c;
     }
@@ -417,7 +389,7 @@ void popFood(CMatrix & Mat) {
 void  ShowMatrix (const CMatrix & Mat) {
     ClearScreen();
     Couleur(KReset);
-    cout << "Temps restant " << ": " << getTimeLeft() << " Score J1" << ": " << ScoreJ1 << " Score J2" << ": " << ScoreJ2 << endl;
+    cout << Settings.GameStrings["TimeLeft"] << ": " << getTimeLeft() << Settings.GameStrings["P1Score"] << ": " << ScoreJ1 << Settings.GameStrings["P2Score"] << ": " << ScoreJ2 << endl;
     for (unsigned i = 0; i <= Mat[0].size() + 1; ++i) cout << "=";
     cout << endl;
     for (unsigned i = 0; i < Mat.size(); ++i) {
@@ -427,17 +399,17 @@ void  ShowMatrix (const CMatrix & Mat) {
                 cout << KEmpty;
             }
             if (i == Player1.first && j == Player1.second) {
-                Couleur(KVert);
+                Couleur(getColor(Settings.Colors["ColorPlayer1"]));
                 cout << Mat[i][j];
                 Couleur(KReset);
             }
             if (i == Player2.first && j == Player2.second) {
-                Couleur(KRouge);
+                Couleur(getColor(Settings.Colors["ColorPlayer2"]));
                 cout << Mat[i][j];
                 Couleur(KReset);
             }
             if (Mat[i][j] == Settings.food) {
-                Couleur(KBleu);
+                Couleur(getColor(Settings.Colors["ColorFood"]));
                 cout << Settings.food;
                 Couleur(KReset);
             }
@@ -560,10 +532,12 @@ void getWindowSize(CTerminalSize & Size) {
 
 // Affiche le menu des résultats
 bool win(unsigned Player, unsigned & Score1, unsigned & Score2) {
-        cout << "Félicitations au Joueur " << Player << " ! Il gagne avec " << Score1 << " points contre " << Score2 << "points." << endl;
+        cout << Settings.GameStrings["CongratulationsDialog"] << Player << " ! "
+             << Settings.GameStrings["WinDialog"] << Score1
+             << Settings.GameStrings["FinalScore1"] << Score2 << Settings.GameStrings["FinalScore2"] << endl;
         while (true) {
-            cout << "1. " << "Revenir au menu" << endl;
-            cout << "2. " << "Quitter" << endl;
+            cout << "1. " << Settings.GameStrings["BackMenu"] << endl;
+            cout << "2. " << Settings.GameStrings["Quit"] << endl;
             int choix;
             cin >> choix;
             if (choix == 1)
@@ -588,13 +562,14 @@ bool ppal () {
       startTimer();
       while(Playing) {
             ShowMatrix(Mat);
-            read (STDIN_FILENO, &Saisie, 1); //Lit la touche pressée.
-            readInput(Saisie);
+            if (read (STDIN_FILENO, &Saisie, 1) != 0) // Lit la touche pressée, seulement si il n'y a pas d'erreur
+                readInput(Saisie);
             popFood(Mat);
             if (!(getTimeLeft() >= 0))
                 break;
       }
       reset_input_mode();
+      ClearScreen();
       if (ScoreJ1 > ScoreJ2)
          return win(1, ScoreJ1, ScoreJ2);
       else
@@ -613,9 +588,10 @@ int main()
     bool playing = true;
     while(playing) {
         playing = mainMenu();
-        playing = ppal();
+        if (playing)
+            playing = ppal();
     }
-
+    ClearScreen();
 
     return 0;
 }
