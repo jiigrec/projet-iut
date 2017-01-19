@@ -5,7 +5,10 @@ CONFIG -= qt
 
 QMAKE_MAC_SDK = macosx10.12
 
-LIBS +=  -static
+unix:!macx {
+    LIBS += -static
+}
+
 
 SOURCES += main.cpp \
 
