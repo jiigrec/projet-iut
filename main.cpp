@@ -275,7 +275,7 @@ void setDefaults(CMyParam & MyParams) {
    MyParams.difficulty = 1;
    MyParams.IA = false;
    MyParams.randomFrequency = 3;
-   MyParams.endTime = 60;
+   MyParams.endTime = 99;
 }
 
 /*!

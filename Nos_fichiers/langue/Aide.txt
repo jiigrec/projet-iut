@@ -1,0 +1,36 @@
+.———————————————————————————————————————————————————.
+| 													|
+|			Ce Jeu se joue à deux joueurs			|
+|													|
+|													|
+|													|
+|   L’histoire se déroule au fin fond d’un désert,  |
+| dans un repaire de contrebandiers avec d’énormes 	|  
+| richesses. Malheureusement un chérif arriva dans  |
+|  le repaire. À vous de récupérer un maximum de    |
+|													|
+|													|
+|  > Représente vos personnages. Si vous surprenez  |
+|       l’autre joueur vous gagnez 10 points ! 	    |
+|	  												|
+|													|
+|  # Représente vos trésors. Vous gagnez 1 point    |
+|                par trésor pris.			        |
+|													|
+|													|
+|													|
+| Touches du Joueur 1 par defaut:                   |
+|  Haut : Z   Gauche : Q    Bas : S    Droite : D   |
+|													|
+| Touches du menu pause par defaut: G               |
+|													|
+| Touches du Joueur 2 par defaut:                   |
+|  Haut : O   Gauche : K    Bas : L    Droite : M   |
+|													|
+| L’objectif est d’obtenir le maximum de points     |
+| en 99 secondes.			                        |
+|													|
+|													|
+|	   	      ! Good Luck & Have Fun !				|
+|										         	|
++———————————————————————————————————————————————————+
