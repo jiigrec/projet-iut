@@ -133,7 +133,7 @@ unsigned ScoreJ2;
 
 //! Temps au debut du chronometre
 unsigned long Time;
-//! Compteur du generateur ameatoire
+//! Compteur du generateur aleatoire
 unsigned randomCounter = 0;
 
 
