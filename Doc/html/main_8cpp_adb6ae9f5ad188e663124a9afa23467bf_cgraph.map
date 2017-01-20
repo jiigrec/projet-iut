@@ -1,9 +1,8 @@
 <map id="MoveToken" name="MoveToken">
 <area shape="rect" id="node2" href="$main_8cpp.html#a81a4a924185c81f623edfb38a4f629ed" title="Espace vide. " alt="" coords="148,5,217,32"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a24d8d97414c569e372f4ff5c0a7e2fa0" title="Joueur allant en haut. " alt="" coords="278,56,363,83"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#a0e0be1c05bbe1c9a11c01d5b8b558a70" title="Joueur allant a gauche. " alt="" coords="275,107,366,133"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#acedb4c0046e67a1ce8618258be548e07" title="Joueur allant à droite. " alt="" coords="271,208,370,235"/>
-<area shape="rect" id="node6" href="$main_8cpp.html#a9e68aa6a6900f7f9567ca2f689ae0bdc" title="Joueur allant en bas. " alt="" coords="269,259,372,285"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a24d8d97414c569e372f4ff5c0a7e2fa0" title="Joueur allant en haut. " alt="" coords="278,63,363,89"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a0e0be1c05bbe1c9a11c01d5b8b558a70" title="Joueur allant a gauche. " alt="" coords="275,139,366,165"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#acedb4c0046e67a1ce8618258be548e07" title="Joueur allant à droite. " alt="" coords="271,201,370,228"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#a9e68aa6a6900f7f9567ca2f689ae0bdc" title="Joueur allant en bas. " alt="" coords="269,252,372,279"/>
 <area shape="rect" id="node7" href="$main_8cpp.html#aae35af58c079814bc6b5b300238173e0" title="Fonction pour gerer les actions du joueur. " alt="" coords="144,157,221,184"/>
-<area shape="rect" id="node8" href="$main_8cpp.html#a57652e6682b5bc35b01edc05bfa2af45" title="Fonction pour determiner le joueur en fonction d&#39;une position. " alt="" coords="273,157,368,184"/>
 </map>

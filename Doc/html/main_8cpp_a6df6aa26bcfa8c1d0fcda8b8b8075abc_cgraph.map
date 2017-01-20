@@ -1,25 +1,24 @@
 <map id="readInput" name="readInput">
 <area shape="rect" id="node2" href="$main_8cpp.html#adb6ae9f5ad188e663124a9afa23467bf" title="Deplace un joueur. " alt="" coords="129,157,220,184"/>
-<area shape="rect" id="node10" href="$main_8cpp.html#aa5642769dce9d51ebe5be75b3dd5007e" title="Met le jeu en pause. " alt="" coords="129,563,220,589"/>
+<area shape="rect" id="node9" href="$main_8cpp.html#aa5642769dce9d51ebe5be75b3dd5007e" title="Met le jeu en pause. " alt="" coords="129,512,220,539"/>
 <area shape="rect" id="node3" href="$main_8cpp.html#a81a4a924185c81f623edfb38a4f629ed" title="Espace vide. " alt="" coords="303,5,372,32"/>
 <area shape="rect" id="node4" href="$main_8cpp.html#a24d8d97414c569e372f4ff5c0a7e2fa0" title="Joueur allant en haut. " alt="" coords="475,56,560,83"/>
 <area shape="rect" id="node5" href="$main_8cpp.html#a0e0be1c05bbe1c9a11c01d5b8b558a70" title="Joueur allant a gauche. " alt="" coords="472,107,563,133"/>
-<area shape="rect" id="node6" href="$main_8cpp.html#acedb4c0046e67a1ce8618258be548e07" title="Joueur allant à droite. " alt="" coords="468,208,567,235"/>
-<area shape="rect" id="node7" href="$main_8cpp.html#a9e68aa6a6900f7f9567ca2f689ae0bdc" title="Joueur allant en bas. " alt="" coords="466,259,569,285"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#acedb4c0046e67a1ce8618258be548e07" title="Joueur allant à droite. " alt="" coords="468,157,567,184"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#a9e68aa6a6900f7f9567ca2f689ae0bdc" title="Joueur allant en bas. " alt="" coords="466,208,569,235"/>
 <area shape="rect" id="node8" href="$main_8cpp.html#aae35af58c079814bc6b5b300238173e0" title="Fonction pour gerer les actions du joueur. " alt="" coords="299,157,376,184"/>
-<area shape="rect" id="node9" href="$main_8cpp.html#a57652e6682b5bc35b01edc05bfa2af45" title="Fonction pour determiner le joueur en fonction d&#39;une position. " alt="" coords="470,157,565,184"/>
-<area shape="rect" id="node11" href="$main_8cpp.html#a7473e9a04dc2e8f05241857d86586194" title="Fonction pour arreter la musique. " alt="" coords="296,461,379,488"/>
-<area shape="rect" id="node12" href="$main_8cpp.html#a6a3ca153f0817e8ba91a023b886bb662" title="Efface l&#39;écran du terminal. " alt="" coords="290,512,385,539"/>
-<area shape="rect" id="node21" href="$main_8cpp.html#a3c5e57d9be7dd4fad267101d26d1ab3c" title="Donne le nombre de secondes ecoulées depuis le debut du chronometre. " alt="" coords="268,563,407,589"/>
-<area shape="rect" id="node22" href="$main_8cpp.html#af99d8c0775d8c342a142e2be8c2ea592" title="Remet le mode d&#39;entree par defaut du programme. " alt="" coords="455,715,580,741"/>
-<area shape="rect" id="node23" href="$main_8cpp.html#a224cd3d46cfe5381606415ce3585b91f" title="Change le mode d&#39;entree en mode non canonique. " alt="" coords="280,664,395,691"/>
-<area shape="rect" id="node24" href="$main_8cpp.html#a5950f90fdf5f67fab5bae67d2b350de9" title="Fonction pour jouer la musique. " alt="" coords="297,715,378,741"/>
-<area shape="rect" id="node13" href="$main_8cpp.html#ae421976620c052c8350660039b8cb3bd" title="Code couleur nul (reinitialisation) " alt="" coords="484,411,551,437"/>
-<area shape="rect" id="node14" href="$main_8cpp.html#a660c3e68e5967e553ae7fd9fb7073bbe" title="Code couleur noir. " alt="" coords="490,461,545,488"/>
-<area shape="rect" id="node15" href="$main_8cpp.html#a09f08ffca2080e9ca9c050093a2ca6d5" title="Code couleur rouge. " alt="" coords="483,512,552,539"/>
-<area shape="rect" id="node16" href="$main_8cpp.html#a1cdcc3e3fe7660a6f85532bb0d228fee" title="Code couleur vert. " alt="" coords="490,563,545,589"/>
-<area shape="rect" id="node17" href="$main_8cpp.html#af02736496532ff1e9c9137691bfb1e07" title="Code couleur jaune. " alt="" coords="484,613,551,640"/>
-<area shape="rect" id="node18" href="$main_8cpp.html#a566a648bad2891bdf1d5746fed6fc6d3" title="Code couleur bleu. " alt="" coords="489,664,546,691"/>
-<area shape="rect" id="node19" href="$main_8cpp.html#a0eb078e8b0f7aa0c81169197965bbdd2" title="Code couleur magenta. " alt="" coords="476,309,559,336"/>
-<area shape="rect" id="node20" href="$main_8cpp.html#aa608863de5cd86b7b36f68a1189222cb" title="Code couleur cyan. " alt="" coords="486,360,549,387"/>
+<area shape="rect" id="node10" href="$main_8cpp.html#a7473e9a04dc2e8f05241857d86586194" title="Fonction pour arreter la musique. " alt="" coords="296,411,379,437"/>
+<area shape="rect" id="node11" href="$main_8cpp.html#a6a3ca153f0817e8ba91a023b886bb662" title="Efface l&#39;écran du terminal. " alt="" coords="290,461,385,488"/>
+<area shape="rect" id="node20" href="$main_8cpp.html#a3c5e57d9be7dd4fad267101d26d1ab3c" title="Donne le nombre de secondes ecoulées depuis le debut du chronometre. " alt="" coords="268,512,407,539"/>
+<area shape="rect" id="node21" href="$main_8cpp.html#af99d8c0775d8c342a142e2be8c2ea592" title="Remet le mode d&#39;entree par defaut du programme. " alt="" coords="455,664,580,691"/>
+<area shape="rect" id="node22" href="$main_8cpp.html#a224cd3d46cfe5381606415ce3585b91f" title="Change le mode d&#39;entree en mode non canonique. " alt="" coords="280,613,395,640"/>
+<area shape="rect" id="node23" href="$main_8cpp.html#a5950f90fdf5f67fab5bae67d2b350de9" title="Fonction pour jouer la musique. " alt="" coords="297,664,378,691"/>
+<area shape="rect" id="node12" href="$main_8cpp.html#ae421976620c052c8350660039b8cb3bd" title="Code couleur nul (reinitialisation) " alt="" coords="484,613,551,640"/>
+<area shape="rect" id="node13" href="$main_8cpp.html#a660c3e68e5967e553ae7fd9fb7073bbe" title="Code couleur noir. " alt="" coords="490,259,545,285"/>
+<area shape="rect" id="node14" href="$main_8cpp.html#a09f08ffca2080e9ca9c050093a2ca6d5" title="Code couleur rouge. " alt="" coords="483,309,552,336"/>
+<area shape="rect" id="node15" href="$main_8cpp.html#a1cdcc3e3fe7660a6f85532bb0d228fee" title="Code couleur vert. " alt="" coords="490,360,545,387"/>
+<area shape="rect" id="node16" href="$main_8cpp.html#af02736496532ff1e9c9137691bfb1e07" title="Code couleur jaune. " alt="" coords="484,411,551,437"/>
+<area shape="rect" id="node17" href="$main_8cpp.html#a566a648bad2891bdf1d5746fed6fc6d3" title="Code couleur bleu. " alt="" coords="489,461,546,488"/>
+<area shape="rect" id="node18" href="$main_8cpp.html#a0eb078e8b0f7aa0c81169197965bbdd2" title="Code couleur magenta. " alt="" coords="476,512,559,539"/>
+<area shape="rect" id="node19" href="$main_8cpp.html#aa608863de5cd86b7b36f68a1189222cb" title="Code couleur cyan. " alt="" coords="486,563,549,589"/>
 </map>

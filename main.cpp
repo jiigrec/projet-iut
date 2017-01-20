@@ -589,16 +589,6 @@ void InitMat (CMatrix & Mat, unsigned NbLine, unsigned NbColumn, CPosition & Pos
     Mat[PosPlayer2.first][PosPlayer2.second] = KPlayerUp;
 }
 
-/*!
- * \brief Fonction pour determiner le joueur en fonction d'une position
- * \param Position du joueur inconnu
- * \return Si c'est le joueur 1 ou non
- */
-bool isFirstPlayer(CPosition & Pos) {
-    cout << Pos.first << " " << Pos.second << endl;
-    cout << Player1.first << " " << Player1.second << endl;
-    return (Pos == Player1); //Expression booléenne
-}
 
 /*!
  * \brief Fonction pour gerer les actions du joueur
@@ -634,7 +624,8 @@ bool checkEat(char & Object, CPosition & PosObject,char & Player, CPosition & Po
 
     default:  // Pas un joueur
         if (Object == Settings.food) {
-            if (isFirstPlayer(PosPlayer))
+            if (Input == Settings.Controls["J1Up"] || Input == Settings.Controls["J1Down"]
+                    || Input == Settings.Controls["J1Left"] || Input == Settings.Controls["J1Right"])
                 ++ScoreJ1;
             else
                 ++ScoreJ2;
